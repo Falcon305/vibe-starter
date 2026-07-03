@@ -15,6 +15,12 @@ function walkFiles(dir: string, base: string): string[] {
   });
 }
 
+const BACKUP_DIR = path.join(ROOT, ".vibe/backups");
+
+function backupPath(name: string, relativePath: string): string {
+  return path.join(BACKUP_DIR, name, relativePath);
+}
+
 function copyModuleFiles(name: string): string[] {
   const filesDir = path.join(REGISTRY_DIR, name, "files");
   const relativePaths = walkFiles(filesDir, filesDir);
@@ -22,13 +28,18 @@ function copyModuleFiles(name: string): string[] {
 
   for (const relativePath of relativePaths) {
     const destination = path.join(ROOT, relativePath);
-    if (fs.existsSync(destination)) conflicts.push(relativePath);
+    if (fs.existsSync(destination)) {
+      conflicts.push(relativePath);
+      const backup = backupPath(name, relativePath);
+      fs.mkdirSync(path.dirname(backup), { recursive: true });
+      fs.copyFileSync(destination, backup);
+    }
     fs.mkdirSync(path.dirname(destination), { recursive: true });
     fs.copyFileSync(path.join(filesDir, relativePath), destination);
   }
 
   if (conflicts.length > 0) {
-    console.warn(`  overwrote existing files: ${conflicts.join(", ")}`);
+    console.warn(`  overwrote existing files (backed up): ${conflicts.join(", ")}`);
   }
   return relativePaths;
 }
@@ -154,8 +165,15 @@ export function removeModule(name: string): boolean {
 
   for (const relativePath of target.files) {
     const destination = path.join(ROOT, relativePath);
-    if (fs.existsSync(destination)) fs.rmSync(destination);
+    const backup = backupPath(name, relativePath);
+    if (fs.existsSync(backup)) {
+      fs.copyFileSync(backup, destination);
+    } else if (fs.existsSync(destination)) {
+      fs.rmSync(destination);
+    }
   }
+  const moduleBackup = path.join(BACKUP_DIR, name);
+  if (fs.existsSync(moduleBackup)) fs.rmSync(moduleBackup, { recursive: true, force: true });
 
   lockfile.modules = lockfile.modules.filter((module) => module.name !== name);
   writeLockfile(lockfile);

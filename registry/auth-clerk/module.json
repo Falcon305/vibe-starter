@@ -1,0 +1,53 @@
+{
+  "name": "auth-clerk",
+  "title": "Clerk auth",
+  "description": "Fully hosted authentication with Clerk, including prebuilt sign-in and sign-up UI",
+  "category": "auth",
+  "version": "0.1.0",
+  "provides": ["auth"],
+  "dependencies": { "@clerk/nextjs": "^7.5.12" },
+  "routes": ["/sign-in", "/sign-up"],
+  "env": [
+    {
+      "key": "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
+      "required": true,
+      "secret": false,
+      "description": "Clerk publishable key",
+      "example": ""
+    },
+    {
+      "key": "CLERK_SECRET_KEY",
+      "required": true,
+      "secret": true,
+      "description": "Clerk secret key",
+      "example": ""
+    }
+  ],
+  "csp": {
+    "scriptSrc": ["https://*.clerk.accounts.dev"],
+    "connectSrc": ["https://*.clerk.accounts.dev", "https://clerk-telemetry.com"],
+    "imgSrc": ["https://img.clerk.com"],
+    "frameSrc": ["https://*.clerk.accounts.dev", "https://challenges.cloudflare.com"]
+  },
+  "postInstall": [
+    "This module replaces middleware.ts with a Clerk version that keeps the CSP",
+    "Wrap {children} in app/layout.tsx with <ClerkProvider> from @clerk/nextjs",
+    "Set NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY in .env.local",
+    "For a production custom domain, add clerk.yourdomain.com to lib/security/csp.ts"
+  ],
+  "legal": {
+    "subprocessors": [
+      { "name": "Clerk", "purpose": "Authentication", "url": "https://clerk.com/legal/privacy" }
+    ],
+    "cookies": [
+      {
+        "name": "__session",
+        "category": "necessary",
+        "purpose": "Keeps you signed in",
+        "provider": "Clerk",
+        "retention": "Session"
+      }
+    ],
+    "dataCollected": ["Email address", "Authentication identifiers (managed by Clerk)"]
+  }
+}

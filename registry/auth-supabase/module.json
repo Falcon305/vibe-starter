@@ -1,0 +1,30 @@
+{
+  "name": "auth-supabase",
+  "title": "Supabase auth",
+  "description": "Hosted email and password auth with Supabase, including SSR session refresh",
+  "category": "auth",
+  "version": "0.1.0",
+  "provides": ["auth"],
+  "dependsOn": ["db-supabase"],
+  "routes": ["/login", "/signup"],
+  "postInstall": [
+    "This module replaces middleware.ts with a Supabase session-refreshing version that keeps the CSP",
+    "Enable the email provider in your Supabase auth settings",
+    "Protect a page with requireUser from @/lib/auth-supabase/user"
+  ],
+  "legal": {
+    "subprocessors": [
+      { "name": "Supabase", "purpose": "Authentication", "url": "https://supabase.com/privacy" }
+    ],
+    "cookies": [
+      {
+        "name": "sb-*",
+        "category": "necessary",
+        "purpose": "Keeps you signed in",
+        "provider": "Supabase",
+        "retention": "Session"
+      }
+    ],
+    "dataCollected": ["Email address", "Hashed password (managed by Supabase)"]
+  }
+}
