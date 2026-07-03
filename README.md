@@ -45,10 +45,15 @@ installs them, generates your legal pages, and leaves you with a running, deploy
 
 ## Modules
 
-Run `pnpm vibe list` to see them, or let `/vibe-starter` pick. Available today: `db-drizzle-neon`,
-`auth-better-auth`, `dashboard`, `admin`, `payments-stripe`, `email-resend`, `notifications`,
-`waitlist`, `contact-form`, `blog-mdx`, `analytics-plausible`, and `analytics-umami`. See the
-[module catalog](./docs/modules.md) for the full list and roadmap.
+Run `pnpm vibe list` to see them, or let `/vibe-starter` pick. Twenty modules cover the full stack:
+
+- **Data and auth:** `db-drizzle-neon`, `db-supabase`, `auth-better-auth`, `auth-supabase`, `auth-clerk`
+- **App surface:** `dashboard`, `admin`, `teams-orgs`, `file-upload`
+- **Monetization and comms:** `payments-stripe`, `email-resend`, `notifications`
+- **Growth and content:** `waitlist`, `contact-form`, `blog-mdx`, `analytics-plausible`, `analytics-umami`
+- **AI, i18n, and ops:** `ai-chat`, `i18n`, `monitoring-sentry`
+
+Pick one `db` and one `auth`. See the [module catalog](./docs/modules.md) for details.
 
 ```bash
 pnpm vibe add auth-better-auth dashboard

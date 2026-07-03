@@ -5,13 +5,14 @@ SEO) is always present, so nothing here covers it.
 
 ## Availability
 
-Always run `pnpm vibe list` first and install only what it shows. Modules available today:
-`db-drizzle-neon`, `auth-better-auth`, `dashboard`, `admin`, `payments-stripe`, `email-resend`,
-`notifications`, `waitlist`, `contact-form`, `blog-mdx`, `analytics-plausible`, `analytics-umami`.
+Always run `pnpm vibe list` first and install only what it shows. All twenty catalog modules ship
+in the registry: `db-drizzle-neon`, `db-supabase`, `auth-better-auth`, `auth-supabase`,
+`auth-clerk`, `dashboard`, `admin`, `teams-orgs`, `file-upload`, `payments-stripe`, `email-resend`,
+`notifications`, `waitlist`, `contact-form`, `blog-mdx`, `analytics-plausible`, `analytics-umami`,
+`ai-chat`, `i18n`, `monitoring-sentry`.
 
-Capabilities without a module yet (`teams-orgs`, `i18n`, `ai-chat`, `file-upload`,
-`monitoring-sentry`, `auth-clerk`, `auth-supabase`, `db-supabase`) are built on demand with the
-`vibe-build` skill, which keeps the code to the same security bar.
+Anything the catalog does not cover is built on demand with the `vibe-build` skill, which keeps the
+code to the same security bar.
 
 ## Capabilities to default modules
 

@@ -49,10 +49,20 @@ resolve against the app once copied.
    installed module, so the privacy policy, cookie table, and CSP stay accurate.
 6. Prints `postInstall` steps and the env keys you still need to fill in.
 
+## Extension points
+
+Drop a file into one of these directories and the installer wires it into the matching generated
+barrel automatically:
+
+- `lib/db/schema/<name>.ts` — Drizzle tables, exported from the schema barrel.
+- `lib/config-plugins/<name>.ts` — default-export a `(config) => config` wrapper for `next.config`.
+- `lib/auth/plugins/<name>.ts` and `lib/auth/client-plugins/<name>.ts` — default-export a Better
+  Auth server or client plugin.
+
 ## Rules
 
 - Never hardcode secrets. Declare them in `env` and read them through validated config.
 - Extend the CSP through the `csp` field, never by weakening the base policy.
 - Declare every third party you send data to under `legal.subprocessors`.
-- Keep files self-contained and idempotent. `pnpm vibe remove <name>` deletes exactly the files
-  the module installed.
+- Keep files self-contained and idempotent. `pnpm vibe remove <name>` deletes exactly the files the
+  module installed and restores any base files it had overwritten from a backup.

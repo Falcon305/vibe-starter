@@ -36,14 +36,20 @@ registry/payments-stripe/
 2. Copies `files/` into the app and records them in `.vibe/installed.json`.
 3. Merges `dependencies`, `devDependencies`, and `scripts` into `package.json`.
 4. Appends new env keys to `.env.example`.
-5. Regenerates four files from every installed module, so the app stays consistent:
+5. Regenerates these files from every installed module, so the app stays consistent:
    - `lib/legal/modules.generated.ts` — subprocessors, cookies, and data collected.
    - `lib/security/csp.generated.ts` — extra CSP sources.
    - `lib/env.generated.ts` — validated schema for module env vars.
    - `lib/db/schema/index.ts` — a barrel of every module's Drizzle tables.
+   - `lib/config-plugins/index.ts` — composes `next.config` wrappers (used by `i18n`, Sentry).
+   - `lib/auth/plugins/index.ts` and `lib/auth/client-plugins/index.ts` — Better Auth server and
+     client plugins (used by `teams-orgs`).
 
-`pnpm vibe remove <module>` reverses the file copy and regenerates the same files, refusing to
-remove a module another installed module depends on.
+When a module overwrites an existing file (for example an auth escape hatch replacing
+`middleware.ts`), the original is copied to `.vibe/backups/<module>/` first.
+
+`pnpm vibe remove <module>` reverses the file copy, restores any backed-up originals, and
+regenerates the same files, refusing to remove a module another installed module depends on.
 
 ## The skills
 
