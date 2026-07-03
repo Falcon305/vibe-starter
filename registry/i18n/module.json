@@ -1,0 +1,15 @@
+{
+  "name": "i18n",
+  "title": "Internationalization",
+  "description": "Cookie-based locale selection and translations with next-intl",
+  "category": "content",
+  "version": "0.1.0",
+  "provides": ["i18n"],
+  "dependencies": { "next-intl": "^4.13.1" },
+  "postInstall": [
+    "Wrap {children} in app/layout.tsx with <NextIntlClientProvider> from next-intl",
+    "Add locales as messages/<locale>.json files",
+    "Use getTranslations in server components and useTranslations in client components"
+  ],
+  "legal": { "subprocessors": [], "cookies": [], "dataCollected": [] }
+}

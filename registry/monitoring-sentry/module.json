@@ -1,0 +1,39 @@
+{
+  "name": "monitoring-sentry",
+  "title": "Sentry monitoring",
+  "description": "Runtime error and performance monitoring with Sentry",
+  "category": "ops",
+  "version": "0.1.0",
+  "provides": ["monitoring"],
+  "dependencies": { "@sentry/nextjs": "^10.63.0" },
+  "env": [
+    {
+      "key": "NEXT_PUBLIC_SENTRY_DSN",
+      "required": false,
+      "secret": false,
+      "description": "Your Sentry project DSN",
+      "example": ""
+    }
+  ],
+  "csp": {
+    "scriptSrc": [],
+    "connectSrc": ["https://*.sentry.io"],
+    "imgSrc": [],
+    "frameSrc": []
+  },
+  "postInstall": [
+    "Set NEXT_PUBLIC_SENTRY_DSN in .env.local",
+    "For source map upload, set SENTRY_AUTH_TOKEN and configure org/project in lib/config-plugins/sentry.ts"
+  ],
+  "legal": {
+    "subprocessors": [
+      {
+        "name": "Sentry",
+        "purpose": "Error and performance monitoring",
+        "url": "https://sentry.io/privacy/"
+      }
+    ],
+    "cookies": [],
+    "dataCollected": ["Error reports and performance traces"]
+  }
+}
