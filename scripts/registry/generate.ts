@@ -10,6 +10,7 @@ const DB_SCHEMA_DIR = path.join(ROOT, "lib/db/schema");
 const CONFIG_PLUGINS_DIR = path.join(ROOT, "lib/config-plugins");
 const AUTH_PLUGINS_DIR = path.join(ROOT, "lib/auth/plugins");
 const AUTH_CLIENT_PLUGINS_DIR = path.join(ROOT, "lib/auth/client-plugins");
+const AUTH_SOCIAL_DIR = path.join(ROOT, "lib/auth/social");
 
 function siblingModules(dir: string): string[] {
   return fs
@@ -51,6 +52,16 @@ function regenerateAuthPluginBarrel(dir: string, exportName: string): void {
   const file = `${imports ? `${imports}\n\n` : ""}export const ${exportName} = [${list}];
 `;
   fs.writeFileSync(path.join(dir, "index.ts"), file);
+}
+
+function regenerateSocialProviders(): void {
+  if (!fs.existsSync(AUTH_SOCIAL_DIR)) return;
+  const modules = siblingModules(AUTH_SOCIAL_DIR);
+  const imports = modules.map((name) => `import ${name} from "./${name}";`).join("\n");
+  const spread = modules.map((name) => `...${name}`).join(", ");
+  const file = `${imports ? `${imports}\n\n` : ""}export const socialProviders = {${spread ? ` ${spread} ` : ""}};
+`;
+  fs.writeFileSync(path.join(AUTH_SOCIAL_DIR, "index.ts"), file);
 }
 
 function dedupe(values: string[]): string[] {
@@ -128,4 +139,5 @@ export const moduleDataCollected: string[] = ${JSON.stringify(dataCollected, nul
   regenerateConfigPlugins();
   regenerateAuthPluginBarrel(AUTH_PLUGINS_DIR, "authPlugins");
   regenerateAuthPluginBarrel(AUTH_CLIENT_PLUGINS_DIR, "authClientPlugins");
+  regenerateSocialProviders();
 }

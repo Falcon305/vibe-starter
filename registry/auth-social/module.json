@@ -1,0 +1,56 @@
+{
+  "name": "auth-social",
+  "title": "Social login",
+  "description": "Google and GitHub OAuth sign-in on top of Better Auth",
+  "category": "auth",
+  "version": "0.1.0",
+  "provides": ["social-login"],
+  "dependsOn": ["auth-better-auth"],
+  "env": [
+    {
+      "key": "GITHUB_CLIENT_ID",
+      "required": false,
+      "secret": false,
+      "description": "GitHub OAuth client ID",
+      "example": ""
+    },
+    {
+      "key": "GITHUB_CLIENT_SECRET",
+      "required": false,
+      "secret": true,
+      "description": "GitHub OAuth client secret",
+      "example": ""
+    },
+    {
+      "key": "GOOGLE_CLIENT_ID",
+      "required": false,
+      "secret": false,
+      "description": "Google OAuth client ID",
+      "example": ""
+    },
+    {
+      "key": "GOOGLE_CLIENT_SECRET",
+      "required": false,
+      "secret": true,
+      "description": "Google OAuth client secret",
+      "example": ""
+    }
+  ],
+  "postInstall": [
+    "Set the client id and secret for each provider you want in .env.local; unset providers are skipped",
+    "Set each provider's OAuth redirect URL to {site}/api/auth/callback/{provider}",
+    "Render <SocialButtons /> from @/components/auth/social-buttons on your sign-in page"
+  ],
+  "legal": {
+    "subprocessors": [
+      {
+        "name": "GitHub",
+        "purpose": "OAuth sign-in",
+        "url": "https://docs.github.com/site-policy/privacy-policies"
+      },
+      { "name": "Google", "purpose": "OAuth sign-in", "url": "https://policies.google.com/privacy" }
+    ],
+    "cookies": [],
+    "dataCollected": ["OAuth profile (name, email, avatar)"]
+  }
+}
