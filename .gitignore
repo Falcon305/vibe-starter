@@ -42,3 +42,8 @@ next-env.d.ts
 
 # vibe module backups (transient)
 .vibe/backups/
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
