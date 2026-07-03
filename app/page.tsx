@@ -36,7 +36,7 @@ export default function HomePage() {
   return (
     <div className="flex min-h-dvh flex-col">
       <SiteHeader />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <section className="mx-auto max-w-5xl px-4 py-24 text-center">
           <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
             Ship a real website without the footguns
