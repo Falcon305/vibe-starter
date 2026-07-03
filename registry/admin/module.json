@@ -1,0 +1,21 @@
+{
+  "name": "admin",
+  "title": "Admin panel",
+  "description": "A role-gated admin page that lists users, restricted by an email allowlist",
+  "category": "app",
+  "version": "0.1.0",
+  "provides": ["admin"],
+  "dependsOn": ["auth-better-auth"],
+  "routes": ["/admin"],
+  "env": [
+    {
+      "key": "ADMIN_EMAILS",
+      "required": true,
+      "secret": false,
+      "description": "Comma-separated list of emails allowed into the admin panel",
+      "example": "you@example.com"
+    }
+  ],
+  "postInstall": ["Set ADMIN_EMAILS in .env.local"],
+  "legal": { "subprocessors": [], "cookies": [], "dataCollected": [] }
+}

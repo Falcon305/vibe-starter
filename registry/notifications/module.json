@@ -1,0 +1,15 @@
+{
+  "name": "notifications",
+  "title": "Notifications",
+  "description": "In-app notifications stored in Postgres, with an optional email copy",
+  "category": "app",
+  "version": "0.1.0",
+  "provides": ["notifications"],
+  "dependsOn": ["auth-better-auth", "email-resend"],
+  "routes": ["/notifications"],
+  "postInstall": [
+    "Run pnpm db:generate && pnpm db:migrate to create the notifications table",
+    "Call createNotification() from your server code to notify a user"
+  ],
+  "legal": { "subprocessors": [], "cookies": [], "dataCollected": [] }
+}
