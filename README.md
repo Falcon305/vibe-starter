@@ -4,7 +4,7 @@
 
 <br/>
 
-**A production-ready Next.js starter for people who want to ship a real website<br/>without first becoming a security engineer or a privacy lawyer.**
+**A production-ready Next.js starter you drive with Claude Code, Codex, or any coding agent —<br/>ship a real website without first becoming a security engineer or a privacy lawyer.**
 
 <br/>
 
@@ -21,9 +21,31 @@
 ---
 
 Most starter templates hand you an empty app and wish you luck. vibe-starter is different: it is a
-**secure base** plus a **library of feature modules**, driven by **Claude Code skills** that
-interview you about your business idea and assemble only the parts you actually need — with the
-legal pages, cookie consent, and security hardening already done the way a senior engineer would.
+**secure base** plus a **library of feature modules**, driven by **coding agents** that interview
+you about your business idea and assemble only the parts you actually need — with the legal pages,
+cookie consent, and security hardening already done the way a senior engineer would.
+
+## 🤖 Built for coding agents
+
+This is the main event. Run it inside **Claude Code** and the `/vibe-starter` skill interviews you
+in plain English, then scaffolds a tailored, secure app — no boilerplate archaeology.
+
+<div align="center">
+  <img src=".github/assets/claude-code.svg" alt="Claude Code running the /vibe-starter skill" width="820" />
+</div>
+
+Using **Codex**, **Cursor**, or another agent? The same guardrails live in [`AGENTS.md`](./AGENTS.md),
+and the `vibe` CLI composes modules straight from the terminal — so every agent keeps the code
+secure and production-ready.
+
+<div align="center">
+  <img src=".github/assets/codex.svg" alt="Codex building a feature with the vibe CLI and repo conventions" width="820" />
+</div>
+
+## 📦 What it builds
+
+Every scaffold starts from the same secure, legally-complete base — themed, accessible, and
+deployable on its own:
 
 <div align="center">
   <img src=".github/assets/app-preview.svg" alt="The secure, legally-complete base app" width="840" />
@@ -57,7 +79,8 @@ Then, inside Claude Code, run the scaffolder and describe your business in plain
 ```
 
 It figures out which modules you need, installs them, generates your legal pages, and leaves you
-with a running, deployable app.
+with a running, deployable app. Using another agent? Point it at [`AGENTS.md`](./AGENTS.md) and let
+it drive the `vibe` CLI.
 
 ### Add capabilities anytime
 

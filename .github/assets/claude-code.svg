@@ -1,0 +1,31 @@
+<svg width="1000" height="560" viewBox="0 0 1000 560" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <rect x="0.5" y="0.5" width="999" height="559" rx="14" fill="#0C0C11" stroke="#26262F"/>
+  <path d="M0 14 A14 14 0 0 1 14 0 H986 A14 14 0 0 1 1000 14 V44 H0 Z" fill="#16161D"/>
+  <circle cx="26" cy="22" r="6" fill="#FF5F57"/>
+  <circle cx="48" cy="22" r="6" fill="#FEBC2E"/>
+  <circle cx="70" cy="22" r="6" fill="#28C840"/>
+  <text x="500" y="27" text-anchor="middle" font-size="13" fill="#8B8B96"><tspan fill="#D97757">✳</tspan> Claude Code — my-app</text>
+
+  <g font-size="15">
+    <text x="28" y="84"><tspan fill="#6B6B78">&gt;</tspan><tspan fill="#E6E6EC"> /vibe-starter</tspan></text>
+
+    <text x="28" y="120"><tspan fill="#D97757">●</tspan><tspan fill="#E6E6EC"> What are you building? Describe it in plain English.</tspan></text>
+
+    <text x="28" y="156"><tspan fill="#6B6B78">&gt;</tspan><tspan fill="#C9C9D4"> A SaaS where fitness coaches sell subscription training plans.</tspan></text>
+
+    <text x="28" y="196"><tspan fill="#D97757">●</tspan><tspan fill="#E6E6EC"> A subscription SaaS with logins and payments. Three quick checks:</tspan></text>
+    <text y="224"><tspan x="46" fill="#6B6B78">└</tspan><tspan x="68" fill="#E6E6EC">Will people sign in?</tspan><tspan x="392" fill="#4ADE80">→ yes</tspan></text>
+    <text y="250"><tspan x="46" fill="#6B6B78">└</tspan><tspan x="68" fill="#E6E6EC">Do you charge money?</tspan><tspan x="392" fill="#4ADE80">→ monthly subscriptions</tspan></text>
+    <text y="276"><tspan x="46" fill="#6B6B78">└</tspan><tspan x="68" fill="#E6E6EC">EU users or personal data?</tspan><tspan x="392" fill="#4ADE80">→ yes, GDPR applies</tspan></text>
+
+    <text x="28" y="316"><tspan fill="#D97757">●</tspan><tspan fill="#E6E6EC"> Plan — installing 7 modules:</tspan></text>
+    <text y="344"><tspan x="46" fill="#6B6B78">└</tspan><tspan x="68" fill="#A78BFA">auth-better-auth · db-drizzle-neon · dashboard · teams-orgs</tspan></text>
+    <text y="370"><tspan x="46" fill="#6B6B78">└</tspan><tspan x="68" fill="#A78BFA">payments-stripe · email-resend · contact-form</tspan></text>
+
+    <text x="28" y="410"><tspan fill="#D97757">●</tspan><tspan fill="#E6E6EC"> Done — secure app scaffolded with GDPR pages and Stripe wired in.</tspan></text>
+    <text y="438"><tspan x="46" fill="#6B6B78">└</tspan><tspan x="68" fill="#8B8B96">Running at localhost:3000 · add your API keys to go live.</tspan></text>
+  </g>
+
+  <rect x="20" y="482" width="960" height="46" rx="10" fill="#101017" stroke="#2E2E39"/>
+  <text x="38" y="510" font-size="15"><tspan fill="#D97757">&gt;</tspan><tspan fill="#6B6B78"> Try "add a pricing page" — /vibe-build keeps it secure</tspan></text>
+</svg>

@@ -1,0 +1,29 @@
+<svg width="1000" height="520" viewBox="0 0 1000 520" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <rect x="0.5" y="0.5" width="999" height="519" rx="14" fill="#0C0C11" stroke="#26262F"/>
+  <path d="M0 14 A14 14 0 0 1 14 0 H986 A14 14 0 0 1 1000 14 V44 H0 Z" fill="#16161D"/>
+  <circle cx="26" cy="22" r="6" fill="#FF5F57"/>
+  <circle cx="48" cy="22" r="6" fill="#FEBC2E"/>
+  <circle cx="70" cy="22" r="6" fill="#28C840"/>
+  <text x="500" y="27" text-anchor="middle" font-size="13" fill="#8B8B96"><tspan fill="#34D399">✦</tspan> Codex — my-app</text>
+
+  <g font-size="15">
+    <text x="28" y="84"><tspan fill="#6B6B78">&gt;</tspan><tspan fill="#E6E6EC"> add a customer testimonials section to the landing page</tspan></text>
+
+    <text x="28" y="120"><tspan fill="#34D399">●</tspan><tspan fill="#E6E6EC"> Reading conventions from AGENTS.md · CLAUDE.md</tspan></text>
+    <text y="148"><tspan x="46" fill="#6B6B78">└</tspan><tspan x="68" fill="#8B8B96">Zod-validate inputs · server actions · no client-side secrets</tspan></text>
+
+    <text x="28" y="188"><tspan fill="#34D399">●</tspan><tspan fill="#E6E6EC"> pnpm vibe add contact-form</tspan></text>
+    <text y="216"><tspan x="46" fill="#6B6B78">└</tspan><tspan x="68" fill="#4ADE80">✓ installed</tspan><tspan x="200" fill="#8B8B96">validated + rate-limited</tspan></text>
+
+    <text x="28" y="256"><tspan fill="#34D399">●</tspan><tspan fill="#E6E6EC"> Wrote app/testimonials with a server action and a Zod schema</tspan></text>
+    <text y="284"><tspan x="46" fill="#6B6B78">└</tspan><tspan x="68" fill="#8B8B96">reused the existing rate-limit and UI primitives</tspan></text>
+
+    <text x="28" y="324"><tspan fill="#34D399">●</tspan><tspan fill="#E6E6EC"> pnpm run check</tspan></text>
+    <text y="352"><tspan x="46" fill="#6B6B78">└</tspan><tspan x="68" fill="#4ADE80">typecheck ✓</tspan><tspan x="210" fill="#4ADE80">lint ✓</tspan><tspan x="320" fill="#4ADE80">format ✓</tspan></text>
+
+    <text x="28" y="392"><tspan fill="#34D399">●</tspan><tspan fill="#E6E6EC"> Done — production-ready, and no secrets committed.</tspan></text>
+  </g>
+
+  <rect x="20" y="440" width="960" height="46" rx="10" fill="#101017" stroke="#2E2E39"/>
+  <text x="38" y="468" font-size="15"><tspan fill="#34D399">&gt;</tspan><tspan fill="#6B6B78"> works with any coding agent — the vibe CLI and docs do the rest</tspan></text>
+</svg>
