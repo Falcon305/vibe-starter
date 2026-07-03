@@ -21,6 +21,12 @@ const eslintConfig = defineConfig([
       "jsx-a11y/label-has-associated-control": "off",
     },
   },
+  {
+    files: ["lib/logger.ts"],
+    rules: {
+      "no-console": "off",
+    },
+  },
   globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "registry/**"]),
 ]);
 

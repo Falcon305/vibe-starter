@@ -1,0 +1,49 @@
+{
+  "name": "rate-limit-upstash",
+  "title": "Distributed rate limiting",
+  "description": "Serverless-safe rate limiting backed by Upstash Redis, replacing the in-memory limiter",
+  "category": "ops",
+  "version": "0.1.0",
+  "provides": ["rate-limit"],
+  "dependencies": {
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.38.0"
+  },
+  "env": [
+    {
+      "key": "UPSTASH_REDIS_REST_URL",
+      "required": true,
+      "secret": false,
+      "description": "Upstash Redis REST URL",
+      "example": ""
+    },
+    {
+      "key": "UPSTASH_REDIS_REST_TOKEN",
+      "required": true,
+      "secret": true,
+      "description": "Upstash Redis REST token",
+      "example": ""
+    }
+  ],
+  "csp": {
+    "scriptSrc": [],
+    "connectSrc": ["https://*.upstash.io"],
+    "imgSrc": [],
+    "frameSrc": []
+  },
+  "postInstall": [
+    "This module replaces lib/rate-limit.ts with an Upstash-backed version; removing it restores the in-memory one",
+    "Create an Upstash Redis database and set UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN in .env.local"
+  ],
+  "legal": {
+    "subprocessors": [
+      {
+        "name": "Upstash",
+        "purpose": "Rate-limit counters",
+        "url": "https://upstash.com/trust/privacy.pdf"
+      }
+    ],
+    "cookies": [],
+    "dataCollected": ["Request counts keyed by IP address"]
+  }
+}

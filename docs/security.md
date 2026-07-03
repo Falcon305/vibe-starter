@@ -38,9 +38,11 @@ check ownership, not just authentication.
 
 ## Abuse resistance
 
-Unauthenticated forms and public endpoints are rate-limited. The bundled limiter is in-memory,
-which is correct for a single server; on serverless, move to a shared store such as Upstash or
-Arcjet so limits hold across instances.
+Unauthenticated forms and public endpoints are rate-limited through `await rateLimit(...)`. The
+bundled limiter is in-memory, which is correct for a single server but per-instance on serverless
+(each Vercel lambda keeps its own counter). For production on serverless, run
+`pnpm vibe add rate-limit-upstash` to swap in a shared Upstash Redis sliding-window limiter with
+the same API — no caller changes needed.
 
 ## Secrets and supply chain
 

@@ -16,7 +16,7 @@ export async function joinWaitlist(
   formData: FormData,
 ): Promise<WaitlistState> {
   const ip = clientIp(await headers());
-  if (!rateLimit(`waitlist:${ip}`, 5, 60_000)) {
+  if (!(await rateLimit(`waitlist:${ip}`, 5, 60_000))) {
     return { ok: false, error: "Too many requests. Please try again later." };
   }
 
