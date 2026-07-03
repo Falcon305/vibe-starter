@@ -1,0 +1,47 @@
+{
+  "name": "payments-stripe",
+  "title": "Stripe payments",
+  "description": "Subscription checkout, a customer portal, and verified webhooks with Stripe",
+  "category": "monetization",
+  "version": "0.1.0",
+  "provides": ["payments"],
+  "dependsOn": ["auth-better-auth", "email-resend"],
+  "dependencies": { "stripe": "^22.3.0" },
+  "routes": ["/api/webhooks/stripe"],
+  "env": [
+    {
+      "key": "STRIPE_SECRET_KEY",
+      "required": true,
+      "secret": true,
+      "description": "Secret key from the Stripe dashboard",
+      "example": ""
+    },
+    {
+      "key": "STRIPE_WEBHOOK_SECRET",
+      "required": true,
+      "secret": true,
+      "description": "Signing secret for the Stripe webhook endpoint",
+      "example": ""
+    },
+    {
+      "key": "STRIPE_PRICE_ID",
+      "required": true,
+      "secret": false,
+      "description": "The recurring price the checkout subscribes customers to",
+      "example": "price_..."
+    }
+  ],
+  "postInstall": [
+    "Run pnpm db:generate && pnpm db:migrate to create the customer table",
+    "Set STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, and STRIPE_PRICE_ID in .env.local",
+    "Point a Stripe webhook at /api/webhooks/stripe for customer.subscription events",
+    "Render <UpgradeButton /> and <ManageBillingButton /> where you want them"
+  ],
+  "legal": {
+    "subprocessors": [
+      { "name": "Stripe", "purpose": "Payment processing", "url": "https://stripe.com/privacy" }
+    ],
+    "cookies": [],
+    "dataCollected": ["Billing details processed by Stripe"]
+  }
+}
