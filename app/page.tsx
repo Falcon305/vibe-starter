@@ -1,65 +1,77 @@
-import Image from "next/image";
+import { Blocks, Scale, ShieldCheck, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { buttonVariants } from "@/components/ui/button";
+import { site } from "@/lib/site";
 
-export default function Home() {
+const features = [
+  {
+    icon: ShieldCheck,
+    title: "Secure by default",
+    description:
+      "A Content Security Policy, hardened headers, and validated inputs are wired in before you write a line.",
+  },
+  {
+    icon: Scale,
+    title: "Legally complete",
+    description:
+      "Privacy, terms, and a compliant cookie banner, generated to match the data your app actually collects.",
+  },
+  {
+    icon: Blocks,
+    title: "Only what you need",
+    description:
+      "A secure base plus a library of modules. The scaffolder pulls in auth, payments, or a blog on demand.",
+  },
+  {
+    icon: Sparkles,
+    title: "Built to be prompted",
+    description:
+      "Keep building by describing features in plain English while the guardrails keep the code production-ready.",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex w-full max-w-3xl flex-1 flex-col items-center justify-between bg-white px-16 py-32 sm:items-start dark:bg-black">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl leading-10 font-semibold tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="flex min-h-dvh flex-col">
+      <SiteHeader />
+      <main className="flex-1">
+        <section className="mx-auto max-w-5xl px-4 py-24 text-center">
+          <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
+            Ship a real website without the footguns
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
+          <p className="text-muted-foreground mx-auto mt-6 max-w-2xl text-lg">{site.description}</p>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <Link href="/#features" className={buttonVariants({ size: "lg" })}>
+              See what is included
+            </Link>
             <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              href={site.github}
+              className={buttonVariants({ variant: "outline", size: "lg" })}
+              rel="noreferrer"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="bg-foreground text-background flex h-12 w-full items-center justify-center gap-2 rounded-full px-5 transition-colors hover:bg-[#383838] md:w-[158px] dark:hover:bg-[#ccc]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] md:w-[158px] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+              View on GitHub
+            </a>
+          </div>
+        </section>
+
+        <section id="features" className="mx-auto max-w-5xl px-4 pb-24">
+          <div className="grid gap-6 sm:grid-cols-2">
+            {features.map((feature) => (
+              <div
+                key={feature.title}
+                className="bg-card text-card-foreground rounded-lg border p-6"
+              >
+                <feature.icon className="h-8 w-8" aria-hidden="true" />
+                <h2 className="mt-4 text-lg font-semibold">{feature.title}</h2>
+                <p className="text-muted-foreground mt-2 text-sm">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
+      <SiteFooter />
     </div>
   );
 }
