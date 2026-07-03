@@ -7,16 +7,50 @@ const LEGAL_FILE = path.join(ROOT, "lib/legal/modules.generated.ts");
 const CSP_FILE = path.join(ROOT, "lib/security/csp.generated.ts");
 const ENV_FILE = path.join(ROOT, "lib/env.generated.ts");
 const DB_SCHEMA_DIR = path.join(ROOT, "lib/db/schema");
+const CONFIG_PLUGINS_DIR = path.join(ROOT, "lib/config-plugins");
+const AUTH_PLUGINS_DIR = path.join(ROOT, "lib/auth/plugins");
 
-function regenerateDbSchema(): void {
-  if (!fs.existsSync(DB_SCHEMA_DIR)) return;
-  const modules = fs
-    .readdirSync(DB_SCHEMA_DIR)
+function siblingModules(dir: string): string[] {
+  return fs
+    .readdirSync(dir)
     .filter((file) => file.endsWith(".ts") && file !== "index.ts")
     .map((file) => file.replace(/\.ts$/, ""))
     .sort();
-  const body = modules.map((name) => `export * from "./${name}";`).join("\n");
+}
+
+function regenerateDbSchema(): void {
+  if (!fs.existsSync(DB_SCHEMA_DIR)) return;
+  const body = siblingModules(DB_SCHEMA_DIR)
+    .map((name) => `export * from "./${name}";`)
+    .join("\n");
   fs.writeFileSync(path.join(DB_SCHEMA_DIR, "index.ts"), `${body}\n`);
+}
+
+function regenerateConfigPlugins(): void {
+  if (!fs.existsSync(CONFIG_PLUGINS_DIR)) return;
+  const modules = siblingModules(CONFIG_PLUGINS_DIR);
+  const imports = modules.map((name) => `import ${name} from "./${name}";`).join("\n");
+  const list = modules.join(", ");
+  const file = `import type { NextConfig } from "next";
+${imports}
+
+export function withModulePlugins(config: NextConfig): NextConfig {
+  return [${list}].reduce((current, wrap) => wrap(current), config);
+}
+`;
+  fs.writeFileSync(path.join(CONFIG_PLUGINS_DIR, "index.ts"), file);
+}
+
+function regenerateAuthPlugins(): void {
+  if (!fs.existsSync(AUTH_PLUGINS_DIR)) return;
+  const modules = siblingModules(AUTH_PLUGINS_DIR);
+  const imports = modules.map((name) => `import ${name} from "./${name}";`).join("\n");
+  const list = modules.join(", ");
+  const file = `${imports}
+
+export const authPlugins = [${list}];
+`;
+  fs.writeFileSync(path.join(AUTH_PLUGINS_DIR, "index.ts"), file);
 }
 
 function dedupe(values: string[]): string[] {
@@ -91,4 +125,6 @@ export const moduleDataCollected: string[] = ${JSON.stringify(dataCollected, nul
 
   writeEnv(manifests);
   regenerateDbSchema();
+  regenerateConfigPlugins();
+  regenerateAuthPlugins();
 }
