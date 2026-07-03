@@ -30,9 +30,43 @@ jobs:
 
       - run: pnpm run format:check
 
+      - run: pnpm run test
+
+      - run: pnpm audit --prod --audit-level high
+
       - run: pnpm run build
         env:
           NEXT_PUBLIC_SITE_URL: https://example.com
+
+      - name: vibe doctor smoke
+        run: |
+          pnpm vibe add contact-form
+          pnpm vibe doctor
+
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm exec playwright install --with-deps chromium
+
+      - run: pnpm run test:e2e
+
+  dependency-review:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/dependency-review-action@v4
 
   secrets:
     runs-on: ubuntu-latest
