@@ -1,0 +1,19 @@
+{
+  "name": "auth-passkeys",
+  "title": "Passkeys",
+  "description": "Passwordless WebAuthn passkey sign-in via Better Auth",
+  "category": "auth",
+  "version": "0.1.0",
+  "provides": ["passkeys"],
+  "dependsOn": ["auth-better-auth"],
+  "dependencies": { "@better-auth/passkey": "^1.6.23" },
+  "postInstall": [
+    "Run pnpm db:generate && pnpm db:migrate to create the passkey table",
+    "Register with authClient.passkey.addPasskey() and sign in with authClient.signIn.passkey()"
+  ],
+  "legal": {
+    "subprocessors": [],
+    "cookies": [],
+    "dataCollected": ["Passkey public keys and device metadata"]
+  }
+}
