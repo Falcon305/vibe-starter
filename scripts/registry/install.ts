@@ -112,10 +112,30 @@ export type InstallResult = {
   postInstall: string[];
 };
 
+const EXCLUSIVE_CAPABILITIES = new Set(["auth", "db"]);
+
+function assertNoCapabilityConflicts(names: Iterable<string>): void {
+  const providers = new Map<string, string[]>();
+  for (const name of new Set(names)) {
+    for (const capability of loadManifest(name).provides) {
+      if (!EXCLUSIVE_CAPABILITIES.has(capability)) continue;
+      providers.set(capability, [...(providers.get(capability) ?? []), name]);
+    }
+  }
+  for (const [capability, list] of providers) {
+    if (list.length > 1) {
+      throw new Error(
+        `Cannot install: multiple "${capability}" providers (${list.join(", ")}). Remove one first.`,
+      );
+    }
+  }
+}
+
 export function installModules(requested: string[]): InstallResult {
   const order = resolveInstallOrder(requested);
   const lockfile = readLockfile();
   const alreadyInstalled = new Set(lockfile.modules.map((module) => module.name));
+  assertNoCapabilityConflicts([...alreadyInstalled, ...order]);
 
   const installed: string[] = [];
   const skipped: string[] = [];

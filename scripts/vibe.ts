@@ -1,3 +1,4 @@
+import { runDoctor } from "./registry/doctor";
 import { installModules, removeModule } from "./registry/install";
 import { readLockfile } from "./registry/lockfile";
 import { listModuleNames, loadManifest } from "./registry/registry";
@@ -67,6 +68,12 @@ function commandRemove(names: string[]): void {
   print("Run pnpm install to prune unused dependencies if needed.");
 }
 
+function commandDoctor(): void {
+  print("Running vibe doctor...");
+  print();
+  if (!runDoctor()) process.exit(1);
+}
+
 function commandHelp(): void {
   print("vibe — registry module manager");
   print();
@@ -75,6 +82,7 @@ function commandHelp(): void {
   print("  info <module>        Show a module manifest");
   print("  add <module...>      Install modules and their dependencies");
   print("  remove <module...>   Remove installed modules");
+  print("  doctor               Check the installed set for conflicts and drift");
 }
 
 function main(): void {
@@ -89,6 +97,8 @@ function main(): void {
       return commandAdd(args);
     case "remove":
       return commandRemove(args);
+    case "doctor":
+      return commandDoctor();
     case "help":
     case undefined:
       return commandHelp();
