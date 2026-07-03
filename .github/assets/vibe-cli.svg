@@ -1,0 +1,28 @@
+<svg width="1000" height="520" viewBox="0 0 1000 520" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <rect x="0.5" y="0.5" width="999" height="519" rx="14" fill="#0C0C11" stroke="#26262F"/>
+  <path d="M0 14 A14 14 0 0 1 14 0 H986 A14 14 0 0 1 1000 14 V44 H0 Z" fill="#16161D"/>
+  <circle cx="26" cy="22" r="6" fill="#FF5F57"/>
+  <circle cx="48" cy="22" r="6" fill="#FEBC2E"/>
+  <circle cx="70" cy="22" r="6" fill="#28C840"/>
+  <text x="500" y="27" text-anchor="middle" font-size="13" fill="#6B6B78">zsh — my-app</text>
+
+  <g font-size="15">
+    <text x="24" y="82"><tspan fill="#4ADE80">❯</tspan><tspan fill="#E6E6EC"> pnpm vibe list</tspan></text>
+
+    <text x="24" y="120" fill="#C9C9D4" font-weight="700">Available modules:</text>
+    <text y="146"><tspan x="40" fill="#A78BFA">auth-better-auth</tspan><tspan x="290" fill="#8B8B96">Email and password auth you own</tspan></text>
+    <text y="171"><tspan x="40" fill="#A78BFA">payments-stripe</tspan><tspan x="290" fill="#8B8B96">Subscriptions, portal, verified webhooks</tspan></text>
+    <text y="196"><tspan x="40" fill="#A78BFA">teams-orgs</tspan><tspan x="290" fill="#8B8B96">Organizations, members, roles, invites</tspan></text>
+    <text y="221"><tspan x="40" fill="#A78BFA">ai-chat</tspan><tspan x="290" fill="#8B8B96">Streaming Claude chat via the AI SDK</tspan></text>
+    <text y="246"><tspan x="40" fill="#A78BFA">blog-mdx</tspan><tspan x="290" fill="#8B8B96">File-based markdown blog with an RSS feed</tspan></text>
+    <text y="271"><tspan x="40" fill="#6B6B78" font-style="italic">… and 15 more — 20 modules total</tspan></text>
+
+    <text x="24" y="322"><tspan fill="#4ADE80">❯</tspan><tspan fill="#E6E6EC"> pnpm vibe add auth-better-auth dashboard</tspan></text>
+
+    <text y="360"><tspan x="40" fill="#4ADE80">✓ Installed</tspan><tspan x="180" fill="#C9C9D4">db-drizzle-neon, auth-better-auth, dashboard</tspan></text>
+    <text y="385"><tspan x="40" fill="#FBBF24">+ env</tspan><tspan x="180" fill="#C9C9D4">3 keys added to .env.example</tspan></text>
+    <text y="410"><tspan x="40" fill="#38BDF8">→ next</tspan><tspan x="180" fill="#C9C9D4">pnpm install &amp;&amp; pnpm db:migrate</tspan></text>
+
+    <text x="24" y="452"><tspan fill="#4ADE80">❯</tspan><tspan fill="#E6E6EC"> </tspan><tspan fill="#4ADE80">█</tspan></text>
+  </g>
+</svg>

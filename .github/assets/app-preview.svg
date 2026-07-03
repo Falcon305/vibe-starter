@@ -1,0 +1,91 @@
+<svg width="1200" height="784" viewBox="0 0 1200 784" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, -apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="pageBg" x1="600" y1="52" x2="600" y2="772" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B0B0F"/>
+      <stop offset="1" stop-color="#0E0B12"/>
+    </linearGradient>
+  </defs>
+
+  <!-- window -->
+  <rect x="0.5" y="0.5" width="1199" height="783" rx="16" fill="#16161D" stroke="#2A2A34"/>
+  <!-- chrome -->
+  <circle cx="30" cy="26" r="6" fill="#FF5F57"/>
+  <circle cx="52" cy="26" r="6" fill="#FEBC2E"/>
+  <circle cx="74" cy="26" r="6" fill="#28C840"/>
+  <rect x="150" y="13" width="900" height="26" rx="13" fill="#0B0B0F"/>
+  <text x="170" y="30" font-size="13" fill="#6B6B78">localhost:3000</text>
+
+  <!-- page -->
+  <rect x="8" y="52" width="1184" height="724" rx="10" fill="url(#pageBg)"/>
+
+  <!-- nav -->
+  <text x="56" y="96" font-size="17" font-weight="700" fill="#FAFAFA">vibe-starter</text>
+  <path d="M1136 84 a11 11 0 1 1 -13 -13 a9 9 0 0 0 13 13 z" fill="none" stroke="#9A9AA6" stroke-width="1.6"/>
+  <line x1="24" y1="120" x2="1176" y2="120" stroke="#1C1C24"/>
+
+  <!-- hero -->
+  <text x="600" y="204" text-anchor="middle" font-size="50" font-weight="800" fill="#FAFAFA" letter-spacing="-1">Ship a real website without the</text>
+  <text x="600" y="260" text-anchor="middle" font-size="50" font-weight="800" fill="#FAFAFA" letter-spacing="-1">footguns</text>
+  <text x="600" y="304" text-anchor="middle" font-size="17" fill="#8B8B96">A secure, legally-complete Next.js starter that scaffolds only the parts</text>
+  <text x="600" y="328" text-anchor="middle" font-size="17" fill="#8B8B96">your business needs.</text>
+
+  <!-- buttons -->
+  <g transform="translate(424 360)">
+    <rect width="196" height="44" rx="9" fill="#FAFAFA"/>
+    <text x="98" y="28" text-anchor="middle" font-size="15" font-weight="600" fill="#0B0B0F">See what is included</text>
+    <rect x="208" width="150" height="44" rx="9" fill="none" stroke="#33333F"/>
+    <text x="283" y="28" text-anchor="middle" font-size="15" font-weight="600" fill="#E5E5EA">View on GitHub</text>
+  </g>
+
+  <!-- feature cards -->
+  <g>
+    <!-- card 1 -->
+    <g transform="translate(70 452)">
+      <rect width="506" height="120" rx="12" fill="#131319" stroke="#22222C"/>
+      <path d="M40 30 l20 7 v14 c0 12 -8 20 -20 25 c-12 -5 -20 -13 -20 -25 v-14 z" fill="none" stroke="#A78BFA" stroke-width="2"/>
+      <path d="M32 52 l6 6 l12 -14" fill="none" stroke="#A78BFA" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="30" y="88" font-size="17" font-weight="700" fill="#FAFAFA">Secure by default</text>
+      <text x="30" y="108" font-size="12.5" fill="#82828E">A Content Security Policy, hardened headers, and validated inputs.</text>
+    </g>
+    <!-- card 2 -->
+    <g transform="translate(624 452)">
+      <rect width="506" height="120" rx="12" fill="#131319" stroke="#22222C"/>
+      <path d="M40 26 v30 M26 40 h28 M26 40 l-8 16 h16 z M54 40 l8 16 h-16 z" fill="none" stroke="#818CF8" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="40" cy="24" r="2.5" fill="#818CF8"/>
+      <text x="30" y="88" font-size="17" font-weight="700" fill="#FAFAFA">Legally complete</text>
+      <text x="30" y="108" font-size="12.5" fill="#82828E">Privacy, terms, and a compliant cookie banner for the data you collect.</text>
+    </g>
+    <!-- card 3 -->
+    <g transform="translate(70 588)">
+      <rect width="506" height="120" rx="12" fill="#131319" stroke="#22222C"/>
+      <g stroke="#F472B6" stroke-width="2" fill="none">
+        <rect x="24" y="28" width="14" height="14" rx="3"/>
+        <rect x="46" y="28" width="14" height="14" rx="3"/>
+        <rect x="24" y="50" width="14" height="14" rx="3"/>
+        <rect x="46" y="50" width="14" height="14" rx="3"/>
+      </g>
+      <text x="30" y="92" font-size="17" font-weight="700" fill="#FAFAFA">Only what you need</text>
+      <text x="30" y="112" font-size="12.5" fill="#82828E">A secure base plus modules pulled in on demand — auth, payments, more.</text>
+    </g>
+    <!-- card 4 -->
+    <g transform="translate(624 588)">
+      <rect width="506" height="120" rx="12" fill="#131319" stroke="#22222C"/>
+      <path d="M40 24 l4 12 l12 4 l-12 4 l-4 12 l-4 -12 l-12 -4 l12 -4 z" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linejoin="round"/>
+      <text x="30" y="92" font-size="17" font-weight="700" fill="#FAFAFA">Built to be prompted</text>
+      <text x="30" y="112" font-size="12.5" fill="#82828E">Describe features in plain English; guardrails keep the code production-ready.</text>
+    </g>
+  </g>
+
+  <!-- cookie banner -->
+  <g transform="translate(8 712)">
+    <rect width="1184" height="60" rx="10" fill="#101017" stroke="#22222C"/>
+    <text x="26" y="35" font-size="12.5" fill="#9A9AA6">We use necessary cookies to run this site. With your consent we also use analytics and marketing cookies.</text>
+    <g transform="translate(760 16)">
+      <rect width="96" height="28" rx="7" fill="#FAFAFA"/>
+      <text x="48" y="19" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0B0B0F">Accept all</text>
+      <rect x="106" width="92" height="28" rx="7" fill="none" stroke="#33333F"/>
+      <text x="152" y="19" text-anchor="middle" font-size="12.5" font-weight="600" fill="#E5E5EA">Reject all</text>
+      <text x="300" y="19" text-anchor="middle" font-size="12.5" font-weight="600" fill="#9A9AA6">Preferences</text>
+    </g>
+  </g>
+</svg>

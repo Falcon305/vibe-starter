@@ -1,0 +1,52 @@
+<svg width="1280" height="400" viewBox="0 0 1280 400" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, -apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="400" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B0B0F"/>
+      <stop offset="1" stop-color="#141019"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="360" y1="150" x2="920" y2="230" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#818CF8"/>
+      <stop offset="0.5" stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#F472B6"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(640 90) rotate(90) scale(300 640)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6D28D9" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#6D28D9" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1280" height="400" rx="20" fill="url(#bg)"/>
+  <rect width="1280" height="400" rx="20" fill="url(#glow)"/>
+  <rect x="1" y="1" width="1278" height="398" rx="19" stroke="#262630" stroke-width="1.5"/>
+
+  <!-- dotted texture -->
+  <g fill="#2A2A38">
+    <circle cx="90" cy="70" r="2"/><circle cx="140" cy="70" r="2"/><circle cx="90" cy="120" r="2"/>
+    <circle cx="1190" cy="330" r="2"/><circle cx="1140" cy="330" r="2"/><circle cx="1190" cy="280" r="2"/>
+  </g>
+
+  <!-- shield mark -->
+  <g transform="translate(566 62)">
+    <path d="M74 6 L138 30 V78 C138 118 110 146 74 160 C38 146 10 118 10 78 V30 Z" fill="#16161D" stroke="url(#accent)" stroke-width="3"/>
+    <path d="M46 82 l20 20 l38 -44" stroke="url(#accent)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <text x="640" y="270" text-anchor="middle" font-size="86" font-weight="800" fill="url(#accent)" letter-spacing="-2">vibe-starter</text>
+  <text x="640" y="316" text-anchor="middle" font-size="24" font-weight="500" fill="#B9B9C6">Ship a real website without the footguns.</text>
+
+  <!-- pills -->
+  <g font-size="15" font-weight="600">
+    <g transform="translate(430 344)">
+      <rect width="132" height="34" rx="17" fill="#16161D" stroke="#33333F"/>
+      <text x="66" y="22" text-anchor="middle" fill="#C9C9D4">Next.js 16</text>
+    </g>
+    <g transform="translate(572 344)">
+      <rect width="150" height="34" rx="17" fill="#16161D" stroke="#33333F"/>
+      <text x="75" y="22" text-anchor="middle" fill="#C9C9D4">Secure by default</text>
+    </g>
+    <g transform="translate(732 344)">
+      <rect width="118" height="34" rx="17" fill="#16161D" stroke="#33333F"/>
+      <text x="59" y="22" text-anchor="middle" fill="#C9C9D4">GDPR / CCPA</text>
+    </g>
+  </g>
+</svg>
