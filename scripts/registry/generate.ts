@@ -5,9 +5,45 @@ import type { ModuleManifest } from "./schema";
 
 const LEGAL_FILE = path.join(ROOT, "lib/legal/modules.generated.ts");
 const CSP_FILE = path.join(ROOT, "lib/security/csp.generated.ts");
+const ENV_FILE = path.join(ROOT, "lib/env.generated.ts");
 
 function dedupe(values: string[]): string[] {
   return [...new Set(values)];
+}
+
+type EnvVar = ModuleManifest["env"][number];
+
+function zodFor(variable: EnvVar): string {
+  const base = "z.string().min(1)";
+  return variable.required ? base : `${base}.optional()`;
+}
+
+function writeEnv(manifests: ModuleManifest[]): void {
+  const seen = new Set<string>();
+  const variables = manifests
+    .flatMap((manifest) => manifest.env)
+    .filter((variable) => {
+      if (seen.has(variable.key)) return false;
+      seen.add(variable.key);
+      return true;
+    });
+
+  const server = variables.filter((variable) => !variable.key.startsWith("NEXT_PUBLIC_"));
+  const client = variables.filter((variable) => variable.key.startsWith("NEXT_PUBLIC_"));
+
+  const entries = (list: EnvVar[]) =>
+    list.map((variable) => `  ${variable.key}: ${zodFor(variable)},`).join("\n");
+  const runtime = (list: EnvVar[]) =>
+    list.map((variable) => `  ${variable.key}: process.env.${variable.key},`).join("\n");
+
+  const header = variables.length > 0 ? 'import { z } from "zod";\n\n' : "";
+  const file = `${header}export const generatedServerEnv = {${server.length ? `\n${entries(server)}\n` : ""}};
+
+export const generatedClientEnv = {${client.length ? `\n${entries(client)}\n` : ""}};
+
+export const generatedRuntimeEnv = {${variables.length ? `\n${runtime(variables)}\n` : ""}};
+`;
+  fs.writeFileSync(ENV_FILE, file);
 }
 
 export function regenerate(manifests: ModuleManifest[]): void {
@@ -40,4 +76,6 @@ export const moduleDataCollected: string[] = ${JSON.stringify(dataCollected, nul
 };
 `;
   fs.writeFileSync(CSP_FILE, cspFile);
+
+  writeEnv(manifests);
 }

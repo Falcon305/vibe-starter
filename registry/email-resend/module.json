@@ -1,0 +1,40 @@
+{
+  "name": "email-resend",
+  "title": "Resend Email",
+  "description": "Transactional email through Resend with a typed sendEmail helper",
+  "category": "communications",
+  "version": "0.1.0",
+  "provides": ["email"],
+  "dependencies": { "resend": "^4.0.0" },
+  "env": [
+    {
+      "key": "RESEND_API_KEY",
+      "required": true,
+      "secret": true,
+      "description": "API key from the Resend dashboard",
+      "example": ""
+    },
+    {
+      "key": "EMAIL_FROM",
+      "required": true,
+      "secret": false,
+      "description": "Verified sender address",
+      "example": "hello@example.com"
+    }
+  ],
+  "postInstall": [
+    "Set RESEND_API_KEY and EMAIL_FROM in .env.local",
+    "Verify your sending domain in the Resend dashboard"
+  ],
+  "legal": {
+    "subprocessors": [
+      {
+        "name": "Resend",
+        "purpose": "Transactional email delivery",
+        "url": "https://resend.com/legal/privacy-policy"
+      }
+    ],
+    "cookies": [],
+    "dataCollected": ["Email addresses and message content for delivery"]
+  }
+}
