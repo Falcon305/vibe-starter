@@ -9,6 +9,7 @@ const ENV_FILE = path.join(ROOT, "lib/env.generated.ts");
 const DB_SCHEMA_DIR = path.join(ROOT, "lib/db/schema");
 const CONFIG_PLUGINS_DIR = path.join(ROOT, "lib/config-plugins");
 const AUTH_PLUGINS_DIR = path.join(ROOT, "lib/auth/plugins");
+const AUTH_CLIENT_PLUGINS_DIR = path.join(ROOT, "lib/auth/client-plugins");
 
 function siblingModules(dir: string): string[] {
   return fs
@@ -42,16 +43,14 @@ ${body}
   fs.writeFileSync(path.join(CONFIG_PLUGINS_DIR, "index.ts"), file);
 }
 
-function regenerateAuthPlugins(): void {
-  if (!fs.existsSync(AUTH_PLUGINS_DIR)) return;
-  const modules = siblingModules(AUTH_PLUGINS_DIR);
+function regenerateAuthPluginBarrel(dir: string, exportName: string): void {
+  if (!fs.existsSync(dir)) return;
+  const modules = siblingModules(dir);
   const imports = modules.map((name) => `import ${name} from "./${name}";`).join("\n");
   const list = modules.join(", ");
-  const file = `${imports}
-
-export const authPlugins = [${list}];
+  const file = `${imports ? `${imports}\n\n` : ""}export const ${exportName} = [${list}];
 `;
-  fs.writeFileSync(path.join(AUTH_PLUGINS_DIR, "index.ts"), file);
+  fs.writeFileSync(path.join(dir, "index.ts"), file);
 }
 
 function dedupe(values: string[]): string[] {
@@ -127,5 +126,6 @@ export const moduleDataCollected: string[] = ${JSON.stringify(dataCollected, nul
   writeEnv(manifests);
   regenerateDbSchema();
   regenerateConfigPlugins();
-  regenerateAuthPlugins();
+  regenerateAuthPluginBarrel(AUTH_PLUGINS_DIR, "authPlugins");
+  regenerateAuthPluginBarrel(AUTH_CLIENT_PLUGINS_DIR, "authClientPlugins");
 }

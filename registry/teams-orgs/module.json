@@ -1,0 +1,18 @@
+{
+  "name": "teams-orgs",
+  "title": "Teams and organizations",
+  "description": "Multi-tenant organizations with members, roles, and invitations via Better Auth",
+  "category": "app",
+  "version": "0.1.0",
+  "provides": ["teams"],
+  "dependsOn": ["auth-better-auth"],
+  "postInstall": [
+    "Run pnpm db:generate && pnpm db:migrate to create the organization tables",
+    "Use authClient.organization.create / inviteMember / setActive from the client"
+  ],
+  "legal": {
+    "subprocessors": [],
+    "cookies": [],
+    "dataCollected": ["Organization names and membership"]
+  }
+}
