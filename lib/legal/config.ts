@@ -1,4 +1,9 @@
 import type { ConsentCategory } from "@/lib/consent/types";
+import {
+  moduleCookies,
+  moduleDataCollected,
+  moduleSubprocessors,
+} from "@/lib/legal/modules.generated";
 import { site } from "@/lib/site";
 
 export type Jurisdiction = "eu" | "us" | "global";
@@ -46,6 +51,7 @@ export const legalConfig: LegalConfig = {
     "Contact details you submit, such as your name and email address",
     "Account credentials, if you create an account",
     "Usage, device, and log information collected automatically",
+    ...moduleDataCollected,
   ],
   subprocessors: [
     {
@@ -53,6 +59,7 @@ export const legalConfig: LegalConfig = {
       purpose: "Application hosting and content delivery",
       url: "https://vercel.com/legal/privacy-policy",
     },
+    ...moduleSubprocessors,
   ],
   cookies: [
     {
@@ -69,6 +76,7 @@ export const legalConfig: LegalConfig = {
       provider: site.name,
       retention: "1 year",
     },
+    ...moduleCookies,
   ],
 };
 

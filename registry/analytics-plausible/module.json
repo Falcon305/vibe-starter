@@ -1,0 +1,38 @@
+{
+  "name": "analytics-plausible",
+  "title": "Plausible Analytics",
+  "description": "Privacy-friendly analytics that loads only after the visitor grants analytics consent",
+  "category": "analytics",
+  "version": "0.1.0",
+  "provides": ["analytics"],
+  "env": [
+    {
+      "key": "NEXT_PUBLIC_PLAUSIBLE_DOMAIN",
+      "required": false,
+      "secret": false,
+      "description": "The domain registered in your Plausible dashboard",
+      "example": "example.com"
+    }
+  ],
+  "csp": {
+    "scriptSrc": ["https://plausible.io"],
+    "connectSrc": ["https://plausible.io"],
+    "imgSrc": [],
+    "frameSrc": []
+  },
+  "postInstall": [
+    "Render <PlausibleAnalytics /> inside <body> in app/layout.tsx",
+    "Set NEXT_PUBLIC_PLAUSIBLE_DOMAIN in .env.local"
+  ],
+  "legal": {
+    "subprocessors": [
+      {
+        "name": "Plausible Analytics",
+        "purpose": "Privacy-friendly website analytics",
+        "url": "https://plausible.io/privacy"
+      }
+    ],
+    "cookies": [],
+    "dataCollected": ["Aggregated, anonymized usage analytics"]
+  }
+}
