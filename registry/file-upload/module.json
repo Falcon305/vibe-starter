@@ -1,0 +1,67 @@
+{
+  "name": "file-upload",
+  "title": "File uploads",
+  "description": "Authenticated presigned uploads to S3 or Cloudflare R2, validated by type",
+  "category": "app",
+  "version": "0.1.0",
+  "provides": ["file-upload"],
+  "dependsOn": ["auth-better-auth"],
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1079.0",
+    "@aws-sdk/s3-request-presigner": "^3.1079.0"
+  },
+  "routes": ["/api/upload"],
+  "env": [
+    {
+      "key": "S3_ACCESS_KEY_ID",
+      "required": true,
+      "secret": true,
+      "description": "Storage access key",
+      "example": ""
+    },
+    {
+      "key": "S3_SECRET_ACCESS_KEY",
+      "required": true,
+      "secret": true,
+      "description": "Storage secret key",
+      "example": ""
+    },
+    {
+      "key": "S3_BUCKET",
+      "required": true,
+      "secret": false,
+      "description": "Bucket name",
+      "example": ""
+    },
+    {
+      "key": "S3_REGION",
+      "required": true,
+      "secret": false,
+      "description": "Region (use auto for R2)",
+      "example": "auto"
+    },
+    {
+      "key": "S3_ENDPOINT",
+      "required": false,
+      "secret": false,
+      "description": "Custom endpoint for R2 or S3-compatible storage",
+      "example": ""
+    }
+  ],
+  "csp": {
+    "scriptSrc": [],
+    "connectSrc": ["https://*.amazonaws.com", "https://*.r2.cloudflarestorage.com"],
+    "imgSrc": [],
+    "frameSrc": []
+  },
+  "postInstall": [
+    "Set the S3_* variables in .env.local",
+    "If your storage host is not S3 or R2, add it to connect-src in lib/security/csp.ts",
+    "Drop <FileUploader /> into a page for signed-in users"
+  ],
+  "legal": {
+    "subprocessors": [],
+    "cookies": [],
+    "dataCollected": ["Files that users upload"]
+  }
+}
