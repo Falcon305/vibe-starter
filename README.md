@@ -51,6 +51,9 @@ deployable on its own:
   <img src=".github/assets/app-preview.svg" alt="The secure, legally-complete base app" width="840" />
 </div>
 
+See a full example: [**vibe-starter-demo**](https://github.com/Falcon305/vibe-starter-demo) is a SaaS
+scaffolded from this starter with auth, a dashboard, Stripe test-mode checkout, and a contact form.
+
 ## ✨ What you get out of the box
 
 |                              |                                                                                                                                                |
