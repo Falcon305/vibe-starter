@@ -1,0 +1,38 @@
+{
+  "name": "ai-chat",
+  "title": "AI chat",
+  "description": "A streaming chat assistant powered by Claude through the AI SDK",
+  "category": "ai",
+  "version": "0.1.0",
+  "provides": ["ai-chat"],
+  "dependencies": {
+    "ai": "^7.0.14",
+    "@ai-sdk/anthropic": "^4.0.7",
+    "@ai-sdk/react": "^4.0.15"
+  },
+  "routes": ["/chat", "/api/chat"],
+  "env": [
+    {
+      "key": "ANTHROPIC_API_KEY",
+      "required": true,
+      "secret": true,
+      "description": "API key from the Anthropic console",
+      "example": ""
+    }
+  ],
+  "postInstall": [
+    "Set ANTHROPIC_API_KEY in .env.local",
+    "Visit /chat, or drop <Chat /> into any page"
+  ],
+  "legal": {
+    "subprocessors": [
+      {
+        "name": "Anthropic",
+        "purpose": "AI model inference",
+        "url": "https://www.anthropic.com/legal/privacy"
+      }
+    ],
+    "cookies": [],
+    "dataCollected": ["Chat messages sent to the AI model"]
+  }
+}

@@ -30,12 +30,13 @@ function regenerateConfigPlugins(): void {
   if (!fs.existsSync(CONFIG_PLUGINS_DIR)) return;
   const modules = siblingModules(CONFIG_PLUGINS_DIR);
   const imports = modules.map((name) => `import ${name} from "./${name}";`).join("\n");
-  const list = modules.join(", ");
+  const body = modules.length
+    ? `  return [${modules.join(", ")}].reduce((current, wrap) => wrap(current), config);`
+    : `  return config;`;
   const file = `import type { NextConfig } from "next";
-${imports}
-
+${imports ? `${imports}\n` : ""}
 export function withModulePlugins(config: NextConfig): NextConfig {
-  return [${list}].reduce((current, wrap) => wrap(current), config);
+${body}
 }
 `;
   fs.writeFileSync(path.join(CONFIG_PLUGINS_DIR, "index.ts"), file);
