@@ -1,0 +1,19 @@
+{
+  "name": "waitlist",
+  "title": "Waitlist",
+  "description": "Collect and confirm emails before launch, stored in Postgres",
+  "category": "growth",
+  "version": "0.1.0",
+  "provides": ["waitlist"],
+  "dependsOn": ["db-drizzle-neon", "email-resend"],
+  "routes": ["/waitlist"],
+  "postInstall": [
+    "Run pnpm db:generate && pnpm db:migrate to create the waitlist table",
+    "Link to /waitlist or embed the WaitlistForm on your landing page"
+  ],
+  "legal": {
+    "subprocessors": [],
+    "cookies": [],
+    "dataCollected": ["Email addresses submitted to the waitlist"]
+  }
+}

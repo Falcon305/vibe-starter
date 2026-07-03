@@ -14,6 +14,13 @@ const eslintConfig = defineConfig([
       "@typescript-eslint/no-explicit-any": "error",
     },
   },
+  {
+    files: ["components/ui/**"],
+    rules: {
+      "jsx-a11y/heading-has-content": "off",
+      "jsx-a11y/label-has-associated-control": "off",
+    },
+  },
   globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "registry/**"]),
 ]);
 

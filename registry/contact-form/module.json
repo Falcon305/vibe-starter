@@ -1,0 +1,25 @@
+{
+  "name": "contact-form",
+  "title": "Contact form",
+  "description": "A validated, rate-limited contact form that emails you submissions",
+  "category": "growth",
+  "version": "0.1.0",
+  "provides": ["contact"],
+  "dependsOn": ["email-resend"],
+  "routes": ["/contact"],
+  "env": [
+    {
+      "key": "CONTACT_EMAIL",
+      "required": true,
+      "secret": false,
+      "description": "Where contact form submissions are sent",
+      "example": "you@example.com"
+    }
+  ],
+  "postInstall": ["Set CONTACT_EMAIL in .env.local", "Link to /contact from your navigation"],
+  "legal": {
+    "subprocessors": [],
+    "cookies": [],
+    "dataCollected": ["Contact form name, email, and message"]
+  }
+}

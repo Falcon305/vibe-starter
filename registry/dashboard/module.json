@@ -1,0 +1,12 @@
+{
+  "name": "dashboard",
+  "title": "Dashboard & auth pages",
+  "description": "Sign-in, sign-up, and a protected dashboard wired to Better Auth",
+  "category": "app",
+  "version": "0.1.0",
+  "provides": ["dashboard"],
+  "dependsOn": ["auth-better-auth"],
+  "routes": ["/sign-in", "/sign-up", "/dashboard"],
+  "postInstall": ["Link to /dashboard from your navigation once a user can sign in"],
+  "legal": { "subprocessors": [], "cookies": [], "dataCollected": [] }
+}
