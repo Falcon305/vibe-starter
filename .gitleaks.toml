@@ -1,0 +1,17 @@
+title = "vibe-starter gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Ignored paths and example files"
+paths = [
+  '''\.env\.example$''',
+  '''pnpm-lock\.yaml$''',
+  '''(^|/)docs/''',
+]
+regexes = [
+  '''your-.*-key-here''',
+  '''sk_test_xxx''',
+  '''example\.com''',
+]
