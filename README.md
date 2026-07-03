@@ -12,7 +12,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-8B5CF6.svg?style=flat-square)](./LICENSE)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16-000000.svg?style=flat-square&logo=nextdotjs)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6.svg?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Modules](https://img.shields.io/badge/modules-20-6366F1.svg?style=flat-square)](./docs/modules.md)
+[![Modules](https://img.shields.io/badge/modules-24-6366F1.svg?style=flat-square)](./docs/modules.md)
 
 [Quickstart](#-quickstart) · [Modules](#-modules) · [The skills](#-the-skills) · [Docs](./docs)
 
@@ -60,7 +60,7 @@ scaffolded from this starter with auth, a dashboard, Stripe test-mode checkout, 
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | 🛡️ **Secure by default**     | Nonce-based Content Security Policy, hardened headers, and Zod-validated inputs wired in before you write a line.                              |
 | ⚖️ **Legally complete**      | GDPR / CCPA privacy, terms, and cookie pages with a compliant, equal-weight consent banner — generated to match the data you actually collect. |
-| 🧩 **Only what you need**    | A secure base plus a registry of 20 modules the scaffolder pulls in on demand — auth, payments, AI, and more.                                  |
+| 🧩 **Only what you need**    | A secure base plus a registry of 24 modules the scaffolder pulls in on demand — auth, payments, AI, and more.                                  |
 | 🤖 **Built to be prompted**  | Keep building by describing features in plain English while the skills keep the code production-ready.                                         |
 | 🔑 **Typed environment**     | Env vars validated at build time; server secrets can never reach the client.                                                                   |
 | 🚦 **Green from commit one** | Strict TypeScript, ESLint, Prettier, secret scanning, and CI on every push.                                                                    |
@@ -105,8 +105,8 @@ dependencies, env, database schema, CSP, and legal pages to match.
 
 ## 🧩 Modules
 
-Run `pnpm vibe list` to see them, or let `/vibe-starter` pick. Twenty modules cover the full stack —
-pick one `db` and one `auth`, add the rest as you need them.
+Run `pnpm vibe list` to see them, or let `/vibe-starter` pick. Twenty-four modules cover the full
+stack — pick one `db` and one `auth`, add the rest as you need them.
 
 | Group                    | Modules                                                                                 |
 | ------------------------ | --------------------------------------------------------------------------------------- |

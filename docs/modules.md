@@ -5,16 +5,21 @@ Run `pnpm vibe list` to see what is available in your copy.
 
 ## Data and auth
 
-| Module             | Provides | Depends on | Notes                                            |
-| ------------------ | -------- | ---------- | ------------------------------------------------ |
-| `db-drizzle-neon`  | db       | —          | Drizzle + Postgres, Docker Compose for local dev |
-| `db-supabase`      | db       | —          | Hosted Postgres via the Supabase client          |
-| `auth-better-auth` | auth     | db         | Email/password auth you own                      |
-| `auth-supabase`    | auth     | db         | Hosted Supabase auth with SSR session refresh    |
-| `auth-clerk`       | auth     | —          | Fully hosted auth with prebuilt UI               |
+| Module             | Provides | Depends on       | Notes                                            |
+| ------------------ | -------- | ---------------- | ------------------------------------------------ |
+| `db-drizzle-neon`  | db       | —                | Drizzle + Postgres, Docker Compose for local dev |
+| `db-supabase`      | db       | —                | Hosted Postgres via the Supabase client          |
+| `auth-better-auth` | auth     | db               | Email/password auth you own                      |
+| `auth-supabase`    | auth     | db               | Hosted Supabase auth with SSR session refresh    |
+| `auth-clerk`       | auth     | —                | Fully hosted auth with prebuilt UI               |
+| `auth-social`      | —        | auth-better-auth | Google and GitHub OAuth sign-in                  |
+| `auth-passkeys`    | —        | auth-better-auth | Passwordless WebAuthn passkeys                   |
+| `auth-2fa`         | —        | auth-better-auth | TOTP two-factor with backup codes                |
 
 Pick one `db` and one `auth`. The Supabase and Clerk modules are hosted escape hatches for
-beginners; the Better Auth + Drizzle default keeps your users in your own database.
+beginners; the Better Auth + Drizzle default keeps your users in your own database. The
+`auth-social`, `auth-passkeys`, and `auth-2fa` add-ons layer onto Better Auth through its plugin
+slots.
 
 ## App surface
 
@@ -45,11 +50,12 @@ beginners; the Better Auth + Drizzle default keeps your users in your own databa
 
 ## AI, i18n, and ops
 
-| Module              | Provides   | Depends on | Notes                                  |
-| ------------------- | ---------- | ---------- | -------------------------------------- |
-| `ai-chat`           | ai-chat    | —          | Streaming Claude chat via the AI SDK   |
-| `i18n`              | i18n       | —          | Cookie-based locales with next-intl    |
-| `monitoring-sentry` | monitoring | —          | Runtime error and performance tracking |
+| Module               | Provides   | Depends on | Notes                                       |
+| -------------------- | ---------- | ---------- | ------------------------------------------- |
+| `ai-chat`            | ai-chat    | —          | Streaming Claude chat via the AI SDK        |
+| `i18n`               | i18n       | —          | Cookie-based locales with next-intl         |
+| `monitoring-sentry`  | monitoring | —          | Runtime error and performance tracking      |
+| `rate-limit-upstash` | rate-limit | —          | Distributed rate limiting via Upstash Redis |
 
 ## Writing your own
 
