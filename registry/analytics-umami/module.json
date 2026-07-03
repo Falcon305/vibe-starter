@@ -1,0 +1,46 @@
+{
+  "name": "analytics-umami",
+  "title": "Umami Analytics",
+  "description": "Privacy-friendly, self-hostable analytics that loads only after analytics consent",
+  "category": "analytics",
+  "version": "0.1.0",
+  "provides": ["analytics"],
+  "env": [
+    {
+      "key": "NEXT_PUBLIC_UMAMI_WEBSITE_ID",
+      "required": false,
+      "secret": false,
+      "description": "Website ID from your Umami dashboard",
+      "example": ""
+    },
+    {
+      "key": "NEXT_PUBLIC_UMAMI_SRC",
+      "required": false,
+      "secret": false,
+      "description": "URL of your Umami script",
+      "example": "https://cloud.umami.is/script.js"
+    }
+  ],
+  "csp": {
+    "scriptSrc": ["https://cloud.umami.is"],
+    "connectSrc": ["https://cloud.umami.is", "https://api-gateway.umami.dev"],
+    "imgSrc": [],
+    "frameSrc": []
+  },
+  "postInstall": [
+    "Render <UmamiAnalytics /> inside <body> in app/layout.tsx",
+    "Set NEXT_PUBLIC_UMAMI_WEBSITE_ID and NEXT_PUBLIC_UMAMI_SRC in .env.local",
+    "If self-hosting Umami, add your host to lib/security/csp.ts connect-src and script-src"
+  ],
+  "legal": {
+    "subprocessors": [
+      {
+        "name": "Umami",
+        "purpose": "Privacy-friendly website analytics",
+        "url": "https://umami.is/privacy"
+      }
+    ],
+    "cookies": [],
+    "dataCollected": ["Aggregated, anonymized usage analytics"]
+  }
+}
