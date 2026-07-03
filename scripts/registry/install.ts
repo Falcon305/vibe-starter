@@ -33,33 +33,35 @@ function copyModuleFiles(name: string): string[] {
   return relativePaths;
 }
 
-function mergeDependencies(manifests: ModuleManifest[]): boolean {
+function mergePackageJson(manifests: ModuleManifest[]): boolean {
   const pkg = JSON.parse(fs.readFileSync(PACKAGE_JSON, "utf8"));
   pkg.dependencies ??= {};
   pkg.devDependencies ??= {};
-  let changed = false;
+  pkg.scripts ??= {};
+  let depsChanged = false;
 
   for (const manifest of manifests) {
     for (const [dep, version] of Object.entries(manifest.dependencies)) {
       if (pkg.dependencies[dep] !== version) {
         pkg.dependencies[dep] = version;
-        changed = true;
+        depsChanged = true;
       }
     }
     for (const [dep, version] of Object.entries(manifest.devDependencies)) {
       if (pkg.devDependencies[dep] !== version) {
         pkg.devDependencies[dep] = version;
-        changed = true;
+        depsChanged = true;
       }
+    }
+    for (const [name, command] of Object.entries(manifest.scripts)) {
+      pkg.scripts[name] ??= command;
     }
   }
 
-  if (changed) {
-    pkg.dependencies = sortRecord(pkg.dependencies);
-    pkg.devDependencies = sortRecord(pkg.devDependencies);
-    fs.writeFileSync(PACKAGE_JSON, `${JSON.stringify(pkg, null, 2)}\n`);
-  }
-  return changed;
+  pkg.dependencies = sortRecord(pkg.dependencies);
+  pkg.devDependencies = sortRecord(pkg.devDependencies);
+  fs.writeFileSync(PACKAGE_JSON, `${JSON.stringify(pkg, null, 2)}\n`);
+  return depsChanged;
 }
 
 function sortRecord(record: Record<string, string>): Record<string, string> {
@@ -131,7 +133,7 @@ export function installModules(requested: string[]): InstallResult {
   regenerate(allManifests);
 
   const newManifests = installed.map(loadManifest);
-  const depsChanged = mergeDependencies(newManifests);
+  const depsChanged = mergePackageJson(newManifests);
   const envAdded = appendEnv(newManifests);
   const postInstall = newManifests.flatMap((manifest) => manifest.postInstall);
 

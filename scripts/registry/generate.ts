@@ -6,6 +6,18 @@ import type { ModuleManifest } from "./schema";
 const LEGAL_FILE = path.join(ROOT, "lib/legal/modules.generated.ts");
 const CSP_FILE = path.join(ROOT, "lib/security/csp.generated.ts");
 const ENV_FILE = path.join(ROOT, "lib/env.generated.ts");
+const DB_SCHEMA_DIR = path.join(ROOT, "lib/db/schema");
+
+function regenerateDbSchema(): void {
+  if (!fs.existsSync(DB_SCHEMA_DIR)) return;
+  const modules = fs
+    .readdirSync(DB_SCHEMA_DIR)
+    .filter((file) => file.endsWith(".ts") && file !== "index.ts")
+    .map((file) => file.replace(/\.ts$/, ""))
+    .sort();
+  const body = modules.map((name) => `export * from "./${name}";`).join("\n");
+  fs.writeFileSync(path.join(DB_SCHEMA_DIR, "index.ts"), `${body}\n`);
+}
 
 function dedupe(values: string[]): string[] {
   return [...new Set(values)];
@@ -78,4 +90,5 @@ export const moduleDataCollected: string[] = ${JSON.stringify(dataCollected, nul
   fs.writeFileSync(CSP_FILE, cspFile);
 
   writeEnv(manifests);
+  regenerateDbSchema();
 }

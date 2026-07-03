@@ -1,0 +1,37 @@
+{
+  "name": "auth-better-auth",
+  "title": "Better Auth",
+  "description": "Email and password authentication you own, stored in your Postgres via Drizzle",
+  "category": "auth",
+  "version": "0.1.0",
+  "provides": ["auth"],
+  "dependsOn": ["db-drizzle-neon"],
+  "dependencies": { "better-auth": "^1.6.23" },
+  "env": [
+    {
+      "key": "BETTER_AUTH_SECRET",
+      "required": true,
+      "secret": true,
+      "description": "Random 32+ character secret used to sign sessions",
+      "example": ""
+    }
+  ],
+  "routes": ["/api/auth"],
+  "postInstall": [
+    "Generate a secret with: openssl rand -base64 32, then set BETTER_AUTH_SECRET in .env.local",
+    "Create the auth tables with: pnpm db:generate && pnpm db:migrate"
+  ],
+  "legal": {
+    "subprocessors": [],
+    "cookies": [
+      {
+        "name": "better-auth.session_token",
+        "category": "necessary",
+        "purpose": "Keeps you signed in",
+        "provider": "This site",
+        "retention": "Session"
+      }
+    ],
+    "dataCollected": ["Account email and a securely hashed password"]
+  }
+}

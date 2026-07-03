@@ -1,0 +1,41 @@
+{
+  "name": "db-drizzle-neon",
+  "title": "Drizzle + Postgres",
+  "description": "Type-safe Postgres access with Drizzle ORM, works with Neon or any Postgres",
+  "category": "data",
+  "version": "0.1.0",
+  "provides": ["db"],
+  "dependencies": { "drizzle-orm": "^0.45.2", "postgres": "^3.4.9" },
+  "devDependencies": { "drizzle-kit": "^0.31.10", "dotenv": "^17.4.2" },
+  "scripts": {
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
+  },
+  "env": [
+    {
+      "key": "DATABASE_URL",
+      "required": true,
+      "secret": true,
+      "description": "Postgres connection string (use the pooled URL on Neon)",
+      "example": "postgresql://vibe:vibe@localhost:5432/vibe"
+    }
+  ],
+  "postInstall": [
+    "Start a local database with: docker compose up -d",
+    "Set DATABASE_URL in .env.local",
+    "Create tables with: pnpm db:generate && pnpm db:migrate"
+  ],
+  "legal": {
+    "subprocessors": [
+      {
+        "name": "Neon",
+        "purpose": "Managed Postgres database hosting",
+        "url": "https://neon.tech/privacy-policy"
+      }
+    ],
+    "cookies": [],
+    "dataCollected": []
+  }
+}

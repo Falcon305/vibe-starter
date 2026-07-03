@@ -32,6 +32,7 @@ export const moduleManifestSchema = z.object({
   provides: z.array(z.string()).default([]),
   dependencies: z.record(z.string(), z.string()).default({}),
   devDependencies: z.record(z.string(), z.string()).default({}),
+  scripts: z.record(z.string(), z.string()).default({}),
   env: z.array(envVarSchema).default([]),
   routes: z.array(z.string()).default([]),
   postInstall: z.array(z.string()).default([]),
