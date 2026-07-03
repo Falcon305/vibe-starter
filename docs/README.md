@@ -4,6 +4,7 @@
 - [Security model](./security.md) — what every scaffolded app gets, and why.
 - [Module catalog](./modules.md) — what you can install today and what is on the roadmap.
 - [Module authoring](./module-authoring.md) — how to write your own module.
+- [Testing](./testing.md) — the unit, e2e, and `vibe doctor` suites and how modules are verified.
 - [Deployment](./deployment.md) — Vercel and self-hosting.
 
 ## The short version
