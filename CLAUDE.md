@@ -20,4 +20,4 @@ should not have to know about CSP, GDPR, or session cookies to ship something sa
 ## Stack
 
 Next.js 16 App Router, React 19, Tailwind v4 + shadcn/ui, Better Auth, Drizzle + Neon
-Postgres, Zod, Arcjet. Vercel-first.
+Postgres, Zod. Vercel-first.

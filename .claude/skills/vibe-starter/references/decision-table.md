@@ -3,6 +3,16 @@
 Map answers to a concrete module set. The base (security headers, CSP, legal pages, consent,
 SEO) is always present, so nothing here covers it.
 
+## Availability
+
+Always run `pnpm vibe list` first and install only what it shows. Modules available today:
+`db-drizzle-neon`, `auth-better-auth`, `dashboard`, `admin`, `payments-stripe`, `email-resend`,
+`notifications`, `waitlist`, `contact-form`, `blog-mdx`, `analytics-plausible`, `analytics-umami`.
+
+Capabilities without a module yet (`teams-orgs`, `i18n`, `ai-chat`, `file-upload`,
+`monitoring-sentry`, `auth-clerk`, `auth-supabase`, `db-supabase`) are built on demand with the
+`vibe-build` skill, which keeps the code to the same security bar.
+
 ## Capabilities to default modules
 
 | Capability           | Default module        | Requires                 |

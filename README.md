@@ -43,10 +43,22 @@ installs them, generates your legal pages, and leaves you with a running, deploy
 - `/vibe-security` — audit the current app against the security checklist
 - `/vibe-legal` — regenerate legal pages when your data practices change
 
+## Modules
+
+Run `pnpm vibe list` to see them, or let `/vibe-starter` pick. Available today: `db-drizzle-neon`,
+`auth-better-auth`, `dashboard`, `admin`, `payments-stripe`, `email-resend`, `notifications`,
+`waitlist`, `contact-form`, `blog-mdx`, `analytics-plausible`, and `analytics-umami`. See the
+[module catalog](./docs/modules.md) for the full list and roadmap.
+
+```bash
+pnpm vibe add auth-better-auth dashboard
+pnpm install
+```
+
 ## Stack
 
 Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · shadcn/ui · Better Auth ·
-Drizzle ORM · Postgres · Zod · Arcjet. Optimized for Vercel, self-hostable anywhere.
+Drizzle ORM · Postgres · Zod. Optimized for Vercel, self-hostable anywhere.
 
 ## Documentation
 
