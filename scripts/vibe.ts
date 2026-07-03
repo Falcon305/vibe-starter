@@ -1,5 +1,5 @@
 import { runDoctor } from "./registry/doctor";
-import { installModules, removeModule } from "./registry/install";
+import { installModules, removeModule, updateModule } from "./registry/install";
 import { readLockfile } from "./registry/lockfile";
 import { listModuleNames, loadManifest } from "./registry/registry";
 
@@ -20,6 +20,47 @@ function commandList(): void {
     const manifest = loadManifest(name);
     const marker = installed.has(name) ? "[installed]" : "           ";
     print(`  ${marker} ${manifest.name.padEnd(22)} ${manifest.description}`);
+  }
+}
+
+function commandSearch(term: string): void {
+  const needle = term.toLowerCase();
+  const installed = new Set(readLockfile().modules.map((module) => module.name));
+  const matches = listModuleNames()
+    .map(loadManifest)
+    .filter(
+      (manifest) =>
+        manifest.name.toLowerCase().includes(needle) ||
+        manifest.title.toLowerCase().includes(needle) ||
+        manifest.description.toLowerCase().includes(needle),
+    );
+  if (matches.length === 0) {
+    print(`No modules match "${term}".`);
+    return;
+  }
+  print(`Modules matching "${term}":`);
+  print();
+  for (const manifest of matches) {
+    const marker = installed.has(manifest.name) ? "[installed]" : "           ";
+    print(`  ${marker} ${manifest.name.padEnd(22)} ${manifest.description}`);
+  }
+}
+
+function commandUpdate(name: string): void {
+  const result = updateModule(name);
+  if (!result.updated) {
+    print(`Not installed: ${name}`);
+    process.exit(1);
+  }
+  print(`Updated: ${name}`);
+  if (result.envAdded.length) {
+    print();
+    print("Added to .env.example (set real values in .env.local):");
+    for (const line of result.envAdded) print(`  ${line}`);
+  }
+  if (result.depsChanged) {
+    print();
+    print("Dependencies changed. Run: pnpm install");
   }
 }
 
@@ -79,8 +120,10 @@ function commandHelp(): void {
   print();
   print("Commands:");
   print("  list                 List available modules");
+  print("  search <term>        Find modules by name or description");
   print("  info <module>        Show a module manifest");
   print("  add <module...>      Install modules and their dependencies");
+  print("  update <module>      Re-copy a module's files from the registry");
   print("  remove <module...>   Remove installed modules");
   print("  doctor               Check the installed set for conflicts and drift");
 }
@@ -90,11 +133,17 @@ function main(): void {
   switch (command) {
     case "list":
       return commandList();
+    case "search":
+      if (!args[0]) throw new Error("Usage: vibe search <term>");
+      return commandSearch(args[0]);
     case "info":
       if (!args[0]) throw new Error("Usage: vibe info <module>");
       return commandInfo(args[0]);
     case "add":
       return commandAdd(args);
+    case "update":
+      if (!args[0]) throw new Error("Usage: vibe update <module>");
+      return commandUpdate(args[0]);
     case "remove":
       return commandRemove(args);
     case "doctor":

@@ -171,6 +171,51 @@ export function installModules(requested: string[]): InstallResult {
   return { installed, skipped, depsChanged, envAdded, postInstall };
 }
 
+export type UpdateResult = { updated: boolean; depsChanged: boolean; envAdded: string[] };
+
+export function updateModule(name: string): UpdateResult {
+  const lockfile = readLockfile();
+  const target = lockfile.modules.find((module) => module.name === name);
+  if (!target) return { updated: false, depsChanged: false, envAdded: [] };
+
+  const filesDir = path.join(REGISTRY_DIR, name, "files");
+  const relativePaths = walkFiles(filesDir, filesDir);
+  const previous = new Set(target.files);
+
+  for (const relativePath of relativePaths) {
+    const destination = path.join(ROOT, relativePath);
+    const backup = backupPath(name, relativePath);
+    if (!previous.has(relativePath) && fs.existsSync(destination) && !fs.existsSync(backup)) {
+      fs.mkdirSync(path.dirname(backup), { recursive: true });
+      fs.copyFileSync(destination, backup);
+    }
+    fs.mkdirSync(path.dirname(destination), { recursive: true });
+    fs.copyFileSync(path.join(filesDir, relativePath), destination);
+  }
+
+  for (const relativePath of target.files) {
+    if (relativePaths.includes(relativePath)) continue;
+    const destination = path.join(ROOT, relativePath);
+    const backup = backupPath(name, relativePath);
+    if (fs.existsSync(backup)) {
+      fs.copyFileSync(backup, destination);
+      fs.rmSync(backup);
+    } else if (fs.existsSync(destination)) {
+      fs.rmSync(destination);
+    }
+  }
+
+  const manifest = loadManifest(name);
+  target.files = relativePaths;
+  target.version = manifest.version;
+  writeLockfile(lockfile);
+  regenerate(lockfile.modules.map((module) => loadManifest(module.name)));
+
+  const depsChanged = mergePackageJson([manifest]);
+  const envAdded = appendEnv([manifest]);
+  return { updated: true, depsChanged, envAdded };
+}
+
 export function removeModule(name: string): boolean {
   const lockfile = readLockfile();
   const target = lockfile.modules.find((module) => module.name === name);
