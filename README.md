@@ -75,6 +75,10 @@ cp .env.example .env.local
 pnpm dev
 ```
 
+Prefer a one-liner? This repo is a GitHub template — click **Use this template** above — and
+[`create-vibe-app`](https://github.com/Falcon305/create-vibe-app) scaffolds the same thing from
+the terminal.
+
 Then, inside Claude Code, run the scaffolder and describe your business in plain English:
 
 ```
