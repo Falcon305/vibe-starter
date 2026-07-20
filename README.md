@@ -139,6 +139,8 @@ Next.js 16 (App Router) · React 19 · TypeScript (strict) · Tailwind CSS v4 ·
 
 ## 📚 Documentation
 
+Browse it all at [**falcon305.github.io/vibe-starter-docs**](https://falcon305.github.io/vibe-starter-docs/), or in the repo:
+
 - [Getting started](./docs/getting-started.md) — your first project, end to end
 - [Architecture](./docs/architecture.md) — the base, the registry, and how the installer works
 - [Security model](./docs/security.md) — CSP, headers, validation, and the threat model
