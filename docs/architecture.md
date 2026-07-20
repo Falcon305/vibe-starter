@@ -43,7 +43,9 @@ registry/payments-stripe/
    - `lib/db/schema/index.ts` — a barrel of every module's Drizzle tables.
    - `lib/config-plugins/index.ts` — composes `next.config` wrappers (used by `i18n`, Sentry).
    - `lib/auth/plugins/index.ts` and `lib/auth/client-plugins/index.ts` — Better Auth server and
-     client plugins (used by `teams-orgs`).
+     client plugins (used by `teams-orgs`, `auth-passkeys`, `auth-2fa`).
+   - `lib/auth/social/index.ts` — merges each `lib/auth/social/*.ts` provider into the
+     `socialProviders` object Better Auth consumes (used by `auth-social`).
 
 When a module overwrites an existing file (for example an auth escape hatch replacing
 `middleware.ts`), the original is copied to `.vibe/backups/<module>/` first.

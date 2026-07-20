@@ -108,20 +108,25 @@ dependencies, env, database schema, CSP, and legal pages to match.
 Run `pnpm vibe list` to see them, or let `/vibe-starter` pick. Twenty-four modules cover the full
 stack — pick one `db` and one `auth`, add the rest as you need them.
 
-| Group                    | Modules                                                                                 |
-| ------------------------ | --------------------------------------------------------------------------------------- |
-| **Data & auth**          | `db-drizzle-neon` · `db-supabase` · `auth-better-auth` · `auth-supabase` · `auth-clerk` |
-| **App surface**          | `dashboard` · `admin` · `teams-orgs` · `file-upload`                                    |
-| **Monetization & comms** | `payments-stripe` · `email-resend` · `notifications`                                    |
-| **Growth & content**     | `waitlist` · `contact-form` · `blog-mdx` · `analytics-plausible` · `analytics-umami`    |
-| **AI, i18n & ops**       | `ai-chat` · `i18n` · `monitoring-sentry`                                                |
+| Group                    | Modules                                                                                                                                |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **Data & auth**          | `db-drizzle-neon` · `db-supabase` · `auth-better-auth` · `auth-supabase` · `auth-clerk` · `auth-social` · `auth-passkeys` · `auth-2fa` |
+| **App surface**          | `dashboard` · `admin` · `teams-orgs` · `file-upload`                                                                                   |
+| **Monetization & comms** | `payments-stripe` · `email-resend` · `notifications`                                                                                   |
+| **Growth & content**     | `waitlist` · `contact-form` · `blog-mdx` · `analytics-plausible` · `analytics-umami`                                                   |
+| **AI, i18n & ops**       | `ai-chat` · `i18n` · `monitoring-sentry` · `rate-limit-upstash`                                                                        |
 
 See the [module catalog](./docs/modules.md) for what each one provides and depends on.
 
 ```bash
+pnpm vibe search auth
 pnpm vibe add auth-better-auth dashboard
 pnpm install
+pnpm vibe doctor
 ```
+
+`vibe update <module>` pulls registry fixes into an installed module, and `vibe doctor` audits the
+installed set for conflicts, drift, and leaked secrets.
 
 ## 🧱 Stack
 
@@ -130,10 +135,12 @@ Next.js 16 (App Router) · React 19 · TypeScript (strict) · Tailwind CSS v4 ·
 
 ## 📚 Documentation
 
+- [Getting started](./docs/getting-started.md) — your first project, end to end
 - [Architecture](./docs/architecture.md) — the base, the registry, and how the installer works
 - [Security model](./docs/security.md) — CSP, headers, validation, and the threat model
 - [Module catalog](./docs/modules.md) & [authoring guide](./docs/module-authoring.md)
-- [Deployment](./docs/deployment.md) — Vercel and self-host
+- [CLI reference](./docs/cli.md) · [skills](./docs/skills.md) · [env vars](./docs/environment.md)
+- [Testing](./docs/testing.md) · [deployment](./docs/deployment.md) · [troubleshooting](./docs/troubleshooting.md)
 
 ## 📄 License
 

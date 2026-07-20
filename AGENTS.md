@@ -15,9 +15,14 @@ on demand with the `vibe` CLI.
 Prefer composing an existing module over hand-writing a feature:
 
 ```bash
-pnpm vibe list                       # see the 20 available modules
+pnpm vibe list                       # see the 24 available modules
+pnpm vibe search <term>              # find modules by name or description
+pnpm vibe info <module>              # inspect a module manifest
 pnpm vibe add <module> [<module>...] # copy it in and rewire deps, env, schema, CSP, legal
 pnpm install
+pnpm vibe doctor                     # audit the installed set for conflicts and drift
+pnpm vibe update <module>            # pull registry fixes into an installed module
+pnpm vibe remove <module>            # remove it and restore backed-up base files
 ```
 
 The installer regenerates env validation, CSP sources, the Drizzle schema barrel, and the legal
