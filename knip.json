@@ -1,0 +1,15 @@
+{
+  "$schema": "https://unpkg.com/knip@latest/schema.json",
+  "entry": ["scripts/vibe.ts", "tests/**/*.{test,spec}.ts", "lib/config-plugins/index.ts"],
+  "project": ["app/**", "components/**", "lib/**", "scripts/**", "tests/**"],
+  "ignore": [
+    "registry/**",
+    "**/*.generated.ts",
+    "lib/db/schema/index.ts",
+    "components/consent/consent-gate.tsx",
+    "components/ui/card.tsx",
+    "components/ui/input.tsx",
+    "components/ui/label.tsx",
+    "components/ui/textarea.tsx"
+  ]
+}

@@ -6,7 +6,7 @@ import {
 } from "@/lib/legal/modules.generated";
 import { site } from "@/lib/site";
 
-export type Jurisdiction = "eu" | "us" | "global";
+type Jurisdiction = "eu" | "us" | "global";
 
 export type Subprocessor = {
   name: string;

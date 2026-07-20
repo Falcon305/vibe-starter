@@ -1,0 +1,31 @@
+name: Bug report
+description: Something is broken
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you do, what did you expect, what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. pnpm vibe add ...
+        2. pnpm dev
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Output of pnpm vibe doctor
+      render: shell
+  - type: input
+    id: versions
+    attributes:
+      label: Node and pnpm versions
+      placeholder: node 22.x / pnpm 10.x

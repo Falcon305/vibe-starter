@@ -14,7 +14,7 @@ const consentRecordSchema = z.object({
 });
 
 export const CONSENT_COOKIE = "vs-consent";
-export const CONSENT_VERSION = 1;
+const CONSENT_VERSION = 1;
 export const CONSENT_MAX_AGE = 60 * 60 * 24 * 365;
 
 export const consentCategories: {

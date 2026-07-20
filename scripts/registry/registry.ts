@@ -24,10 +24,6 @@ export function loadManifest(name: string): ModuleManifest {
   return manifest;
 }
 
-export function loadAllManifests(): ModuleManifest[] {
-  return listModuleNames().map(loadManifest);
-}
-
 export function resolveInstallOrder(names: string[]): string[] {
   const visited = new Set<string>();
   const order: string[] = [];

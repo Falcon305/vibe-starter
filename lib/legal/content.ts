@@ -1,7 +1,7 @@
 import { includesEu, includesUs, legalConfig, type LegalConfig } from "@/lib/legal/config";
 import { site } from "@/lib/site";
 
-export type LegalSection = {
+type LegalSection = {
   id: string;
   heading: string;
   paragraphs: string[];

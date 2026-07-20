@@ -1,0 +1,23 @@
+name: Module request
+description: Propose a new registry module
+labels: [module]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Module name
+      placeholder: payments-paddle
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What it provides
+      description: The capability, the service it integrates, and why it belongs in the registry.
+    validations:
+      required: true
+  - type: textarea
+    id: legal
+    attributes:
+      label: Data and legal footprint
+      description: Third parties it sends data to, cookies it sets, data it collects.

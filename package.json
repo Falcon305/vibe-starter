@@ -18,6 +18,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "pnpm run typecheck && pnpm run lint && pnpm run format:check",
+    "knip": "knip",
     "vibe": "tsx scripts/vibe.ts",
     "prepare": "husky"
   },
@@ -53,6 +54,7 @@
     "eslint-config-next": "16.2.10",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "husky": "^9.1.7",
+    "knip": "^6.27.0",
     "lint-staged": "^17.0.8",
     "prettier": "^3.9.4",
     "prettier-plugin-tailwindcss": "^0.8.0",

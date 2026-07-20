@@ -35,7 +35,7 @@ export type Lockfile = {
   modules: InstalledModule[];
 };
 
-export const LOCKFILE_SCHEMA_VERSION = 2;
+const LOCKFILE_SCHEMA_VERSION = 2;
 
 export function hashFile(absolutePath: string): string {
   return crypto.createHash("sha256").update(fs.readFileSync(absolutePath)).digest("hex");
@@ -75,8 +75,4 @@ export function writeLockfile(lockfile: Lockfile): void {
     LOCKFILE,
     `${JSON.stringify({ schemaVersion: LOCKFILE_SCHEMA_VERSION, modules: sorted }, null, 2)}\n`,
   );
-}
-
-export function isInstalled(name: string): boolean {
-  return readLockfile().modules.some((module) => module.name === name);
 }

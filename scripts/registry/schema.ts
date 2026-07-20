@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const envVarSchema = z.object({
+const envVarSchema = z.object({
   key: z.string(),
   required: z.boolean().default(true),
   secret: z.boolean().default(false),
@@ -8,13 +8,13 @@ export const envVarSchema = z.object({
   example: z.string().optional(),
 });
 
-export const subprocessorSchema = z.object({
+const subprocessorSchema = z.object({
   name: z.string(),
   purpose: z.string(),
   url: z.string().optional(),
 });
 
-export const cookieSchema = z.object({
+const cookieSchema = z.object({
   name: z.string(),
   category: z.enum(["necessary", "analytics", "marketing"]),
   purpose: z.string(),
