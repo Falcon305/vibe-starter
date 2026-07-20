@@ -1,4 +1,17 @@
+import { z } from "zod";
 import type { ConsentCategory, ConsentRecord, ConsentState } from "@/lib/consent/types";
+
+const consentRecordSchema = z.object({
+  version: z.number(),
+  decided: z.boolean().default(false),
+  categories: z
+    .object({
+      necessary: z.boolean().default(true),
+      analytics: z.boolean().default(false),
+      marketing: z.boolean().default(false),
+    })
+    .default({ necessary: true, analytics: false, marketing: false }),
+});
 
 export const CONSENT_COOKIE = "vs-consent";
 export const CONSENT_VERSION = 1;
@@ -50,12 +63,12 @@ export function serializeConsent(categories: ConsentState): string {
 export function parseConsent(value: string | undefined): ConsentRecord | null {
   if (!value) return null;
   try {
-    const parsed = JSON.parse(decodeURIComponent(value)) as ConsentRecord;
-    if (parsed.version !== CONSENT_VERSION) return null;
+    const parsed = consentRecordSchema.safeParse(JSON.parse(decodeURIComponent(value)));
+    if (!parsed.success || parsed.data.version !== CONSENT_VERSION) return null;
     return {
-      version: parsed.version,
-      decided: Boolean(parsed.decided),
-      categories: { ...defaultConsent(), ...parsed.categories, necessary: true },
+      version: parsed.data.version,
+      decided: parsed.data.decided,
+      categories: { ...parsed.data.categories, necessary: true },
     };
   } catch {
     return null;

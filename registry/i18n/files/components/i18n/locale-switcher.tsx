@@ -8,18 +8,25 @@ const locales = [
   { code: "es", label: "ES" },
 ];
 
+function persistLocale(locale: string) {
+  document.cookie = `locale=${locale}; path=/; max-age=31536000; samesite=lax`;
+}
+
 export function LocaleSwitcher() {
   const router = useRouter();
-
-  function setLocale(locale: string) {
-    document.cookie = `locale=${locale}; path=/; max-age=31536000; samesite=lax`;
-    router.refresh();
-  }
 
   return (
     <div className="flex gap-2">
       {locales.map((locale) => (
-        <Button key={locale.code} variant="ghost" size="sm" onClick={() => setLocale(locale.code)}>
+        <Button
+          key={locale.code}
+          variant="ghost"
+          size="sm"
+          onClick={() => {
+            persistLocale(locale.code);
+            router.refresh();
+          }}
+        >
           {locale.label}
         </Button>
       ))}

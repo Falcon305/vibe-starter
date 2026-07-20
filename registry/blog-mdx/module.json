@@ -7,12 +7,21 @@
   "provides": ["blog"],
   "dependencies": {
     "gray-matter": "^4.0.3",
-    "marked": "^18.0.5"
+    "rehype-sanitize": "^6.0.0",
+    "rehype-stringify": "^10.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "unified": "^11.0.5"
   },
   "routes": ["/blog", "/blog/[slug]", "/blog/rss.xml"],
   "postInstall": [
     "Add posts as markdown files in content/blog/",
     "Link to /blog from your navigation"
   ],
-  "legal": { "subprocessors": [], "cookies": [], "dataCollected": [] }
+  "legal": {
+    "subprocessors": [],
+    "cookies": [],
+    "dataCollected": []
+  }
 }

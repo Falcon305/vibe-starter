@@ -1,5 +1,7 @@
 pnpm exec lint-staged
 
+pnpm vibe doctor
+
 if command -v gitleaks >/dev/null 2>&1; then
   gitleaks protect --staged --redact --config .gitleaks.toml
 else

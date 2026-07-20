@@ -43,6 +43,55 @@ jobs:
           pnpm vibe add contact-form
           pnpm vibe doctor
 
+  kitchen-sink:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Install every compatible module
+        run: >
+          pnpm vibe add db-drizzle-neon auth-better-auth auth-social auth-passkeys auth-2fa
+          dashboard admin teams-orgs file-upload payments-stripe email-resend notifications
+          waitlist contact-form blog-mdx analytics-plausible ai-chat i18n monitoring-sentry
+          rate-limit-upstash
+
+      - run: pnpm install --no-frozen-lockfile
+
+      - run: pnpm run typecheck
+
+      - run: pnpm run test
+
+      - run: pnpm vibe doctor
+
+      - run: pnpm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://example.com
+          DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
+          BETTER_AUTH_SECRET: ci-only-secret-ci-only-secret-ci-only
+          RESEND_API_KEY: re_ci_dummy
+          EMAIL_FROM: ci@example.com
+          CONTACT_EMAIL: ci@example.com
+          STRIPE_SECRET_KEY: sk_test_ci
+          STRIPE_WEBHOOK_SECRET: whsec_ci
+          STRIPE_PRICE_ID: price_ci
+          ADMIN_EMAILS: ci@example.com
+          ANTHROPIC_API_KEY: sk-ant-ci
+          S3_ACCESS_KEY_ID: ci
+          S3_SECRET_ACCESS_KEY: ci
+          S3_BUCKET: ci
+          S3_REGION: auto
+          UPSTASH_REDIS_REST_URL: https://ci.upstash.io
+          UPSTASH_REDIS_REST_TOKEN: ci
+
   e2e:
     runs-on: ubuntu-latest
     steps:
