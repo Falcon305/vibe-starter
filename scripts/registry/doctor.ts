@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
-import { readLockfile } from "./lockfile";
-import { ENV_EXAMPLE, ROOT } from "./paths";
+import { hashFile, readLockfile } from "./lockfile";
+import { ENV_EXAMPLE, REGISTRY_DIR, ROOT } from "./paths";
 import { loadManifest } from "./registry";
 
 const EXCLUSIVE_CAPABILITIES = new Set(["auth", "db"]);
@@ -31,7 +31,7 @@ function walk(dir: string): string[] {
 function scanClientSecrets(): Finding[] {
   const leak = /process\.env\.(?!NEXT_PUBLIC_)[A-Z0-9_]+/;
   const findings: Finding[] = [];
-  for (const dir of ["app", "components"]) {
+  for (const dir of ["app", "components", "lib"]) {
     for (const file of walk(path.join(ROOT, dir))) {
       const source = fs.readFileSync(file, "utf8");
       if (!/^["']use client["']/m.test(source)) continue;
@@ -83,10 +83,26 @@ export function runDoctor(): boolean {
 
   for (const entry of lockfile.modules) {
     for (const file of entry.files) {
-      if (!fs.existsSync(path.join(ROOT, file))) {
+      const absolute = path.join(ROOT, file.path);
+      if (!fs.existsSync(absolute)) {
         findings.push({
           level: "error",
-          message: `${entry.name}: missing installed file ${file}.`,
+          message: `${entry.name}: missing installed file ${file.path}.`,
+        });
+        continue;
+      }
+      if (file.hash && hashFile(absolute) !== file.hash) {
+        findings.push({
+          level: "warn",
+          message: `${entry.name}: ${file.path} was modified after install (vibe update --force re-syncs it).`,
+        });
+        continue;
+      }
+      const registrySource = path.join(REGISTRY_DIR, entry.name, "files", file.path);
+      if (fs.existsSync(registrySource) && hashFile(registrySource) !== hashFile(absolute)) {
+        findings.push({
+          level: "warn",
+          message: `${entry.name}: the registry has a newer ${file.path} (run vibe update ${entry.name}).`,
         });
       }
     }
@@ -114,6 +130,19 @@ export function runDoctor(): boolean {
 
   findings.push(...scanClientSecrets());
 
+  const envGenerated = path.join(ROOT, "lib/env.generated.ts");
+  const envSource = fs.existsSync(envGenerated) ? fs.readFileSync(envGenerated, "utf8") : "";
+  for (const manifest of manifests) {
+    for (const variable of manifest.env) {
+      if (!envSource.includes(variable.key)) {
+        findings.push({
+          level: "error",
+          message: `${manifest.name}: env ${variable.key} is missing from lib/env.generated.ts (rerun vibe add or update).`,
+        });
+      }
+    }
+  }
+
   const cspGenerated = path.join(ROOT, "lib/security/csp.generated.ts");
   if (
     !fs.existsSync(cspGenerated) ||
@@ -123,6 +152,19 @@ export function runDoctor(): boolean {
       level: "error",
       message: "lib/security/csp.generated.ts is missing or malformed.",
     });
+  } else {
+    const cspSource = fs.readFileSync(cspGenerated, "utf8");
+    for (const manifest of manifests) {
+      const sources = Object.values(manifest.csp).flat();
+      for (const source of sources) {
+        if (!cspSource.includes(source)) {
+          findings.push({
+            level: "error",
+            message: `${manifest.name}: CSP source ${source} is missing from the generated policy.`,
+          });
+        }
+      }
+    }
   }
   const cspBase = path.join(ROOT, "lib/security/csp.ts");
   if (

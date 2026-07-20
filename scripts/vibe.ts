@@ -46,8 +46,15 @@ function commandSearch(term: string): void {
   }
 }
 
-function commandUpdate(name: string): void {
-  const result = updateModule(name);
+function commandUpdate(name: string, force: boolean): void {
+  const result = updateModule(name, force);
+  if (!result.updated && result.blockedBy.length > 0) {
+    print(`${name} has locally modified files:`);
+    for (const file of result.blockedBy) print(`  ${file}`);
+    print();
+    print("Rerun with --force to overwrite them with the registry versions.");
+    process.exit(1);
+  }
   if (!result.updated) {
     print(`Not installed: ${name}`);
     process.exit(1);
@@ -123,7 +130,9 @@ function commandHelp(): void {
   print("  search <term>        Find modules by name or description");
   print("  info <module>        Show a module manifest");
   print("  add <module...>      Install modules and their dependencies");
-  print("  update <module>      Re-copy a module's files from the registry");
+  print(
+    "  update <module>      Re-copy a module's files from the registry (--force to overwrite local edits)",
+  );
   print("  remove <module...>   Remove installed modules");
   print("  doctor               Check the installed set for conflicts and drift");
 }
@@ -142,8 +151,8 @@ function main(): void {
     case "add":
       return commandAdd(args);
     case "update":
-      if (!args[0]) throw new Error("Usage: vibe update <module>");
-      return commandUpdate(args[0]);
+      if (!args[0]) throw new Error("Usage: vibe update <module> [--force]");
+      return commandUpdate(args[0], args.includes("--force"));
     case "remove":
       return commandRemove(args);
     case "doctor":

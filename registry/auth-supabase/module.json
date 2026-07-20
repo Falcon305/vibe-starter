@@ -5,6 +5,7 @@
   "category": "auth",
   "version": "0.1.0",
   "provides": ["auth"],
+  "overwrites": ["middleware.ts"],
   "dependsOn": ["db-supabase"],
   "routes": ["/login", "/signup"],
   "postInstall": [
@@ -14,7 +15,11 @@
   ],
   "legal": {
     "subprocessors": [
-      { "name": "Supabase", "purpose": "Authentication", "url": "https://supabase.com/privacy" }
+      {
+        "name": "Supabase",
+        "purpose": "Authentication",
+        "url": "https://supabase.com/privacy"
+      }
     ],
     "cookies": [
       {

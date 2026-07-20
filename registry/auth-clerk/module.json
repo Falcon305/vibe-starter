@@ -5,7 +5,10 @@
   "category": "auth",
   "version": "0.1.0",
   "provides": ["auth"],
-  "dependencies": { "@clerk/nextjs": "^7.5.12" },
+  "overwrites": ["middleware.ts"],
+  "dependencies": {
+    "@clerk/nextjs": "^7.5.12"
+  },
   "routes": ["/sign-in", "/sign-up"],
   "env": [
     {
@@ -37,7 +40,11 @@
   ],
   "legal": {
     "subprocessors": [
-      { "name": "Clerk", "purpose": "Authentication", "url": "https://clerk.com/legal/privacy" }
+      {
+        "name": "Clerk",
+        "purpose": "Authentication",
+        "url": "https://clerk.com/legal/privacy"
+      }
     ],
     "cookies": [
       {

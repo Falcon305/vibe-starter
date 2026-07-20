@@ -82,6 +82,10 @@ Field notes:
   `example` seeds `.env.example`.
 - `csp` supports `scriptSrc`, `connectSrc`, `imgSrc`, and `frameSrc`. Sources are merged into the
   generated policy — the base directives can never be weakened from here.
+- `overwrites` lists base files the module intentionally replaces (for example `auth-clerk`
+  declares `middleware.ts`). Overwriting an existing file without declaring it is a hard error,
+  and `next.config.ts`, `lib/env.ts`, `lib/security/`, `lib/consent/`, and `*.generated.ts` can
+  never be replaced by any module.
 - `legal.cookies` entries need all five fields (`name`, `category` of
   `necessary | analytics | marketing`, `purpose`, `provider`, `retention`) — they render directly
   into the cookie policy table.

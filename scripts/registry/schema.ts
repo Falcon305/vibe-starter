@@ -35,6 +35,7 @@ export const moduleManifestSchema = z.object({
   scripts: z.record(z.string(), z.string()).default({}),
   env: z.array(envVarSchema).default([]),
   routes: z.array(z.string()).default([]),
+  overwrites: z.array(z.string()).default([]),
   postInstall: z.array(z.string()).default([]),
   csp: z
     .object({

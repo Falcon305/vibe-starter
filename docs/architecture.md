@@ -48,7 +48,12 @@ registry/payments-stripe/
      `socialProviders` object Better Auth consumes (used by `auth-social`).
 
 When a module overwrites an existing file (for example an auth escape hatch replacing
-`middleware.ts`), the original is copied to `.vibe/backups/<module>/` first.
+`middleware.ts`), it must declare the path in its manifest's `overwrites` list, and the original is
+copied to `.vibe/backups/<module>/` first. The security core — `next.config.ts`, `lib/env.ts`,
+`lib/security/`, `lib/consent/`, and every `*.generated.ts` file — can never be replaced by a
+module. The lockfile records a SHA-256 hash of every installed file, so `vibe doctor` can tell a
+locally edited file from a registry update, and `vibe update` refuses to overwrite local edits
+without `--force`.
 
 `pnpm vibe remove <module>` reverses the file copy, restores any backed-up originals, and
 regenerates the same files, refusing to remove a module another installed module depends on.

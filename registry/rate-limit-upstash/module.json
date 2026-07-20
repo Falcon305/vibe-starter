@@ -5,6 +5,7 @@
   "category": "ops",
   "version": "0.1.0",
   "provides": ["rate-limit"],
+  "overwrites": ["lib/rate-limit.ts"],
   "dependencies": {
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.38.0"
